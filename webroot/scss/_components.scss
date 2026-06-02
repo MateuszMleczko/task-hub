@@ -1,0 +1,144 @@
+@use 'variables' as *;
+// Navbar
+.navbar {
+    background-color: $color-dark;
+    border-bottom: 1px solid rgba($color-teal, 0.3);
+    padding: 1rem 0;
+
+    .navbar-brand {
+        color: $color-yellow;
+        font-weight: 700;
+        font-size: 1.4rem;
+        letter-spacing: -0.02em;
+
+        &:hover {
+            color: $color-teal-light;
+        }
+    }
+
+    .nav-link {
+        color: rgba($color-yellow, 0.7);
+        font-weight: 500;
+        transition: color 0.2s ease;
+
+        &:hover,
+        &.active {
+            color: $color-yellow;
+        }
+    }
+}
+
+// Cards
+.card {
+    background-color: rgba($color-teal, 0.05);
+    border: 1px solid rgba($color-teal, 0.2);
+    border-radius: $border-radius-lg;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba($color-dark, 0.4);
+    }
+
+    .card-header {
+        background-color: rgba($color-teal, 0.1);
+        border-bottom: 1px solid rgba($color-teal, 0.2);
+        font-weight: 600;
+        color: $color-yellow;
+    }
+}
+
+// Buttons
+.btn-primary {
+    background-color: $color-teal;
+    border-color: $color-teal;
+    color: $color-yellow;
+    font-weight: 600;
+
+    &:hover {
+        background-color: darken($color-teal, 8%);
+        border-color: darken($color-teal, 8%);
+        color: $color-yellow;
+    }
+}
+
+.btn-outline-primary {
+    border-color: $color-teal;
+    color: $color-teal-light;
+
+    &:hover {
+        background-color: $color-teal;
+        color: $color-yellow;
+    }
+}
+
+// Forms
+.form-control,
+.form-select {
+    background-color: rgba($color-teal, 0.05);
+    border: 1px solid rgba($color-teal, 0.3);
+    color: $color-yellow;
+    border-radius: $border-radius;
+
+    &:focus {
+        background-color: rgba($color-teal, 0.08);
+        border-color: $color-teal-light;
+        box-shadow: 0 0 0 0.25rem rgba($color-teal, 0.25);
+        color: $color-yellow;
+    }
+
+    &::placeholder {
+        color: rgba($color-yellow, 0.4);
+    }
+}
+
+// Badges / Priority
+.badge-priority-low {
+    background-color: rgba($color-teal-light, 0.2);
+    color: $color-teal-light;
+    border: 1px solid rgba($color-teal-light, 0.4);
+}
+
+.badge-priority-medium {
+    background-color: rgba($color-yellow, 0.2);
+    color: $color-yellow;
+    border: 1px solid rgba($color-yellow, 0.4);
+}
+
+.badge-priority-high {
+    background-color: rgba(#ff6b6b, 0.2);
+    color: #ff6b6b;
+    border: 1px solid rgba(#ff6b6b, 0.4);
+}
+
+// Task card
+.task-card {
+    border-left: 3px solid $color-teal;
+    margin-bottom: 0.75rem;
+
+    &.is-done {
+        opacity: 0.5;
+        border-left-color: rgba($color-teal, 0.3);
+    }
+
+    &.is-blocked {
+        border-left-color: #ff6b6b;
+    }
+}
+
+// Flash messages
+.alert {
+    border-radius: $border-radius;
+    border: none;
+    font-weight: 500;
+
+    &.alert-success {
+        background-color: rgba($color-teal, 0.15);
+        color: $color-teal-light;
+    }
+
+    &.alert-danger {
+        background-color: rgba(#ff6b6b, 0.15);
+        color: #ff6b6b;
+    }
+}
