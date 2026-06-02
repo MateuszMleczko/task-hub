@@ -1,0 +1,24 @@
+// Abstracts
+@use 'variables' as *;
+
+// Bootstrap
+@use '../../node_modules/bootstrap/scss/bootstrap' with (
+  $primary: $color-teal,
+  $secondary: $color-teal-light,
+  $dark: $color-dark,
+  $light: $color-yellow,
+  $body-bg: $color-dark,
+  $body-color: $color-yellow,
+  $font-family-sans-serif: $font-family-sans-serif,
+  $font-size-base: $font-size-base,
+  $line-height-base: $line-height-base,
+  $border-radius: $border-radius,
+  $border-radius-lg: $border-radius-lg,
+  $border-radius-pill: $border-radius-pill
+);
+
+// Bootstrap Icons
+@use '../../node_modules/bootstrap-icons/font/bootstrap-icons';
+
+// Components
+@use 'components';
