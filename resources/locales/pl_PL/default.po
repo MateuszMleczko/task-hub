@@ -1,0 +1,80 @@
+msgid "The user has been saved."
+msgstr "Użytkownik został zapisany."
+
+msgid "The user could not be saved. Please, try again."
+msgstr "Nie udało się zapisać użytkownika. Spróbuj ponownie."
+
+msgid "The user has been deleted."
+msgstr "Użytkownik został usunięty."
+
+msgid "The user could not be deleted. Please, try again."
+msgstr "Nie udało się usunąć użytkownika. Spróbuj ponownie."
+
+msgid "Login successful"
+msgstr "Zalogowano pomyślnie"
+
+msgid "Invalid email or password"
+msgstr "Nieprawidłowy email lub hasło"
+
+msgid "Page test"
+msgstr "Test strony"
+
+msgid "If you see a dark background — the layout works!"
+msgstr "Jeśli widzisz ciemne tło — layout działa!"
+
+msgid "Login"
+msgstr "Zaloguj"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "My tasks"
+msgstr "Moje taski"
+
+msgid "Forgot your password?"
+msgstr "Zapomniałeś hasło?"
+
+msgid "Sign up"
+msgstr "Zarejestruj się"
+
+msgid "Name"
+msgstr "Imię"
+
+msgid "Confirm password"
+msgstr "Potwierdź hasło"
+
+msgid "Logout"
+msgstr "Wyloguj"
+
+msgid "Back"
+msgstr "Wróć"
+
+msgid "Error"
+msgstr "Błąd"
+
+msgid "The requested address {0} was not found on this server."
+msgstr "Żądany adres {0} nie został znaleziony na tym serwerze."
+
+msgid "An Internal Error Has Occurred."
+msgstr "Wystąpił błąd wewnętrzny."
+
+msgid "Registration failed. Please try again."
+msgstr "Rejestracja nie powiodła się. Spróbuj ponownie."
+
+msgid "Registration successful. You can now log in."
+msgstr "Rejestracja zakończona sukcesem. Teraz możesz się zalogować."
+
+msgid "Password must be at least 12 characters long."
+msgstr "Hasło musi mieć co najmniej 12 znaków."
+
+msgid "Password must contain at least one uppercase letter."
+msgstr "Hasło musi zawierać co najmniej jedną wielką literę."
+
+msgid "Password must contain at least one digit."
+msgstr "Hasło musi zawierać co najmniej jedną cyfrę."
+
+msgid "Passwords do not match."
+msgstr "Hasła nie są identyczne."

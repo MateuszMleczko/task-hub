@@ -4,7 +4,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="<?= str_replace('_', '-', \Cake\I18n\I18n::getLocale()) ?>">
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +20,7 @@
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
         <a href="javascript:history.back()" class="btn btn-outline-primary mt-3">
-            <i class="bi bi-arrow-left me-1"></i>Wróć
+            <i class="bi bi-arrow-left me-1"></i><?= __('Back') ?>
         </a>
     </div>
 </main>
