@@ -43,6 +43,7 @@ class ErrorController extends AppController
      */
     public function beforeFilter(EventInterface $event): void
     {
+        $this->setLocaleFromBrowser();
     }
 
     /**

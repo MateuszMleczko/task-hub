@@ -4,7 +4,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="<?= str_replace('_', '-', \Cake\I18n\I18n::getLocale()) ?>">
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,19 +29,8 @@
             <ul class="navbar-nav ms-auto">
                 <?php if ($this->request->getAttribute('identity')): ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Tasks', 'action' => 'index']) ?>">
-                            <i class="bi bi-list-task me-1"></i>Moje taski
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'logout']) ?>">
-                            <i class="bi bi-box-arrow-right me-1"></i>Wyloguj
-                        </a>
-                    </li>
-                <?php else: ?>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'login']) ?>">
-                            <i class="bi bi-box-arrow-in-right me-1"></i>Zaloguj
+                            <i class="bi bi-box-arrow-right me-1"></i><?= __('Logout') ?>
                         </a>
                     </li>
                 <?php endif; ?>

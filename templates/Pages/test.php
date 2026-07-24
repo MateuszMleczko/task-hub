@@ -1,2 +1,2 @@
-<h1>Test strony</h1>
-<p>Jeśli widzisz ciemne tło — layout działa!</p>
+<h1><?= __('Page test') ?></h1>
+<p><?= __('If you see a dark background — the layout works!') ?></p>
