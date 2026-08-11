@@ -1,0 +1,26 @@
+// Color palette
+$color-yellow: #FDEB9E;
+$color-teal-light: #7AE2CF;
+$color-teal:       #077A7D;
+$color-dark:       #06202B;
+
+// Bootstrap overrides
+$primary: $color-teal;
+$secondary: $color-teal-light;
+$dark: $color-dark;
+$light: $color-yellow;
+
+$body-bg: $color-dark;
+$body-color: $color-yellow;
+
+$navbar-dark-bg: $color-dark;
+
+// Typography
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.6;
+
+// Border radius
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-pill: 50rem;
