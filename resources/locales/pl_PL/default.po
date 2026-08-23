@@ -78,3 +78,42 @@ msgstr "Hasło musi zawierać co najmniej jedną cyfrę."
 
 msgid "Passwords do not match."
 msgstr "Hasła nie są identyczne."
+
+msgid "Failed to send password reset email. Please try again later."
+msgstr "Nie udało się wysłać wiadomości e-mail z resetowaniem hasła. Spróbuj ponownie później."
+
+msgid "Set a new password"
+msgstr "Ustaw nowe hasło"
+
+msgid "New password"
+msgstr "Nowe hasło"
+
+msgid "Confirm new password"
+msgstr "Potwierdź nowe hasło"
+
+msgid "Save new password"
+msgstr "Zapisz nowe hasło"
+
+msgid "Back to login"
+msgstr "Powrót do logowania"
+
+msgid "If you provided a correct email adres, reset link has been sent to your email."
+msgstr "Jeśli podałeś poprawny adres e-mail, link resetujący został wysłany na Twój e-mail."
+
+msgid "Failed to send password reset email. Please try again later."
+msgstr "Nie udało się wysłać wiadomości e-mail z resetowaniem hasła. Spróbuj ponownie później."
+
+msgid "Reset your password"
+msgstr "Zresetuj swoje hasło"
+
+msgid "Send reset link"
+msgstr "Wyślij link resetujący"
+
+msgid "Your password has been reset successfully. You can now log in."
+msgstr "Twoje hasło zostało pomyślnie zresetowane. Teraz możesz się zalogować."
+
+msgid "Failed to reset password. Please try again."
+msgstr "Nie udało się zresetować hasła. Spróbuj ponownie."
+
+msgid "You have been logged out."
+msgstr "Zostałeś wylogowany."
