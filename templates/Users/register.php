@@ -3,7 +3,7 @@
         <div class="card mt-5">
             <div class="card-body">
                 <h3 class="card-title mb-4"><?= __('Sign up') ?></h3>
-                <?= $this->Form->create() ?>
+                <?= $this->Form->create($user) ?>
                 <div class="mb-3">
                     <?= $this->Form->control('name', [
                         'label' => __('Name'),
@@ -17,6 +17,32 @@
                         'class' => 'form-control',
                         'required' => true,
                     ]) ?>
+                </div>
+                <div class="mb-3">
+                    <span class="form-label d-block"><?= __('Avatar') ?></span>
+
+                    <div class="row row-cols-4 g-2">
+                        <?php foreach ($avatars as $avatar): ?>
+                            <div class="col">
+                                <input class="btn-check"
+                                       type="radio"
+                                       name="avatar_id"
+                                       id="<?= $avatar->id ?>"
+                                       value="<?= $avatar->id ?>"
+                                >
+
+                                <label class="btn btn-outline-primary w-100 p-1"
+                                       for="<?= $avatar->id ?>">
+                                    <?= $this->Html->image($avatar->storage_key, [
+                                        'alt' => __('Avatar'),
+                                        'width' => 48,
+                                        'height' => 48,
+                                        'class' => 'img-fluid',
+                                    ]) ?>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <?= $this->Form->control('password', [

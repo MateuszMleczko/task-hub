@@ -44,6 +44,11 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Avatars', [
+            'foreignKey' => 'avatar_id',
+            'joinType' => 'LEFT',
+        ]);
     }
 
     /**
@@ -83,6 +88,16 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
+
+        // Bez tego avatar_id=999 z podrobionego POST-a doleciałby do klucza obcego
+        // i wysypał się jako PDOException (500) zamiast komunikatu w formularzu.
+        // allowNullableNulls: NULL jest w porządku - użytkownik nic nie wybrał.
+        $rules->add($rules->existsIn(['avatar_id'], 'Avatars', [
+            'allowNullableNulls' => true,
+        ]), [
+            'errorField' => 'avatar_id',
+            'message' => __('Selected avatar does not exist.'),
+        ]);
 
         return $rules;
     }

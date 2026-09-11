@@ -15,12 +15,14 @@ use Cake\Mailer\MailerAwareTrait;
  *
  * @property \App\Model\Table\UsersTable $Users
  * @property \App\Model\Table\RestorePasswordTokensTable $RestorePasswordTokens
+ * @property \App\Model\Table\TasksTable $Tasks
  */
 class UsersController extends AppController
 {
     use MailerAwareTrait;
     private $Users;
     private $RestorePasswordTokens;
+    private $Tasks;
     /**
      * Initialize controller
      *
@@ -33,6 +35,7 @@ class UsersController extends AppController
         $this->Authentication->allowUnauthenticated(['login', 'register', 'forgotPassword', 'resetPassword']);
         $this->Users = $this->fetchTable('Users');
         $this->RestorePasswordTokens = $this->fetchTable('RestorePasswordTokens');
+        $this->Tasks = $this->fetchTable('Tasks');
     }
 
     /**
@@ -60,44 +63,44 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['get', 'post']);
         $user = $this->Users->newEmptyEntity();
+
+        $avatars = $this->fetchTable('Avatars')
+            ->find()
+            ->where(['is_default' => 1])
+            ->all();
+
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
             $password = $this->request->getData('password');
             $confirmPassword = $this->request->getData('confirm_password');
 
+            $error = null;
+
             if (empty($password) || empty($confirmPassword)) {
-                $this->Flash->error(__('Password and confirm password fields cannot be empty.'));
-                return null;
+                $error = __('Password and confirm password fields cannot be empty.');
+            } elseif ($password !== $confirmPassword) {
+                $error = __('Passwords do not match.');
+            } elseif (mb_strlen($password) < 8) {
+                $error = __('Password must be at least 8 characters long.');
+            } elseif (!preg_match('/[A-Z]/', $password)) {
+                $error = __('Password must contain at least one uppercase letter.');
+            } elseif (!preg_match('/[0-9]/', $password)) {
+                $error = __('Password must contain at least one number.');
             }
 
-            if ($password !== $confirmPassword) {
-                $this->Flash->error(__('Passwords do not match.'));
-                return null;
-            }
-
-            if (mb_strlen($password) < 8) {
-                $this->Flash->error(__('Password must be at least 8 characters long.'));
-                return null;
-            }
-
-            if (!preg_match('/[A-Z]/', $password)) {
-                $this->Flash->error(__('Password must contain at least one uppercase letter.'));
-                return null;
-            }
-
-            if (!preg_match('/[0-9]/', $password)) {
-                $this->Flash->error(__('Password must contain at least one number.'));
-                return null;
-            }
-
-            if ($this->Users->save($user)) {
+            if ($error !== null) {
+                $this->Flash->error($error);
+            } elseif ($this->Users->save($user)) {
                 $this->Flash->success(__('Registration successful. You can now log in.'));
+
                 return $this->redirect(['action' => 'login']);
+            } else {
+                $this->Flash->error(__('Registration failed. Please try again.'));
             }
-            $this->Flash->error(__('Registration failed. Please try again.'));
         }
-        $this->set(compact('user'));
+
+        $this->set(compact('user', 'avatars'));
     }
 
     public function logout()
@@ -205,5 +208,18 @@ class UsersController extends AppController
 
             $this->Flash->success(__('If you provided a correct email adres, reset link has been sent to your email.'));
         }
+    }
+
+    public function profile()
+    {
+        $user = $this->Authentication->getIdentity();
+        $userName = $user->name;
+        $userId = $user->id;
+
+        $totalTasks = $this->Tasks->find()
+            ->where(['user_id' => $userId])
+            ->count();
+
+        $this->set(compact('userName', 'totalTasks'));
     }
 }
