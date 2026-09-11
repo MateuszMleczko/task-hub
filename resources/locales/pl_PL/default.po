@@ -117,3 +117,6 @@ msgstr "Nie udało się zresetować hasła. Spróbuj ponownie."
 
 msgid "You have been logged out."
 msgstr "Zostałeś wylogowany."
+
+msgid "Avatar"
+msgstr "Awatar"

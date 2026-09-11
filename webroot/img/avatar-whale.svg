@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Whale avatar">
+  <rect width="200" height="200" fill="#0E3A5C"/>
+  <circle cx="100" cy="104" r="80" fill="#14486E"/>
+
+  <circle cx="100" cy="32" r="6.5" fill="#E8F6FD" opacity="0.9"/>
+  <circle cx="84" cy="43" r="4.5" fill="#E8F6FD" opacity="0.7"/>
+  <circle cx="116" cy="43" r="4.5" fill="#E8F6FD" opacity="0.7"/>
+  <path d="M138 102 L170 76 L172 134 L140 116 Z" fill="#6FC3E8"/>
+  <path d="M30 106 C30 80 54 62 88 62 C122 62 142 80 142 104 C142 132 118 150 88 150 C54 150 30 132 30 106 Z" fill="#6FC3E8"/>
+  <ellipse cx="86" cy="130" rx="44" ry="19" fill="#E8F6FD"/>
+  <path d="M88 114 C102 114 114 124 116 138 C104 145 90 139 84 126 Z" fill="#4FA9D0"/>
+  <circle cx="58" cy="96" r="6" fill="#12354D"/>
+  <circle cx="60.5" cy="93.5" r="2.2" fill="#E8F6FD"/>
+  <path d="M36 110 Q48 121 62 115" stroke="#12354D" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+</svg>

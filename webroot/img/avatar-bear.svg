@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Bear avatar">
+  <rect width="200" height="200" fill="#F0D9B5"/>
+  <circle cx="100" cy="104" r="80" fill="#E6C99C"/>
+
+  <circle cx="62" cy="60" r="20" fill="#8A5A3B"/>
+  <circle cx="138" cy="60" r="20" fill="#8A5A3B"/>
+  <circle cx="62" cy="60" r="10" fill="#C98A5C"/>
+  <circle cx="138" cy="60" r="10" fill="#C98A5C"/>
+  <circle cx="100" cy="106" r="54" fill="#8A5A3B"/>
+  <ellipse cx="100" cy="128" rx="28" ry="22" fill="#E3B887"/>
+  <circle cx="80" cy="100" r="6.5" fill="#3A2318"/>
+  <circle cx="120" cy="100" r="6.5" fill="#3A2318"/>
+  <circle cx="82.5" cy="97.5" r="2.2" fill="#F0D9B5"/>
+  <circle cx="122.5" cy="97.5" r="2.2" fill="#F0D9B5"/>
+  <ellipse cx="100" cy="119" rx="9" ry="7" fill="#3A2318"/>
+  <path d="M100 126 L100 132" stroke="#3A2318" stroke-width="3" stroke-linecap="round"/>
+  <path d="M100 132 C96 138 90 138 87 133" stroke="#3A2318" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M100 132 C104 138 110 138 113 133" stroke="#3A2318" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+</svg>

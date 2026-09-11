@@ -26,6 +26,28 @@
             color: $color-yellow;
         }
     }
+
+    // Awatar uzytkownika
+    .nav-link-avatar {
+        padding-top: 0;
+        padding-bottom: 0;
+
+        &:hover .navbar-avatar {
+            border-color: $color-teal-light;
+            transform: scale(1.05);
+        }
+    }
+
+    .navbar-avatar {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        background-color: rgba($color-teal, 0.1);
+        border: 2px solid rgba($color-teal, 0.6);
+        transition: border-color 0.2s ease, transform 0.2s ease;
+    }
 }
 
 // Cards

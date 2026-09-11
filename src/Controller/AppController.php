@@ -65,6 +65,32 @@ class AppController extends Controller
     }
 
     /**
+     * Makes the logged in user's avatar available to every template.
+     *
+     * @param \Cake\Event\EventInterface $event The beforeRender event.
+     * @return void
+     */
+    public function beforeRender(EventInterface $event): void
+    {
+        parent::beforeRender($event);
+
+        $userAvatar = null;
+        $identity = $this->Authentication->getIdentity();
+
+        if ($identity !== null) {
+            $user = $this->fetchTable('Users')
+                ->find()
+                ->where(['Users.id' => $identity->getIdentifier()])
+                ->contain('Avatars')
+                ->first();
+
+            $userAvatar = $user?->avatar;
+        }
+
+        $this->set(compact('userAvatar'));
+    }
+
+    /**
      * Selects the active I18n locale based on the browser's Accept-Language header.
      *
      * Polish (`pl`) browsers get `pl_PL`, everything else falls back to `en_US`.
