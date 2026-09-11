@@ -17,7 +17,6 @@ class AddAvatarIdColumnToUsers extends BaseMigration
     {
         $this->table('users')
             ->addColumn('avatar_id', 'integer', ['after' => 'password', 'default' => 1, 'null' => false])
-            ->addForeignKey('avatar_id', 'avatars', 'id', ['delete' => 'SET_NULL', 'update' => 'NO_ACTION'])
             ->update();
     }
 }
