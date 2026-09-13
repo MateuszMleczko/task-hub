@@ -120,3 +120,24 @@ msgstr "Zostałeś wylogowany."
 
 msgid "Avatar"
 msgstr "Awatar"
+
+msgid "To Do"
+msgstr "Do zrobienia"
+
+msgid "In Progress"
+msgstr "W trakcie"
+
+msgid "Blocked"
+msgstr "Zablokowane"
+
+msgid "Done"
+msgstr "Zrobione"
+
+msgid "Low"
+msgstr "Niski"
+
+msgid "Medium"
+msgstr "Średni"
+
+msgid "High"
+msgstr "Wysoki"
