@@ -1,0 +1,25 @@
+// Use by `@use 'variables' as *;`.
+
+@use 'sass:color';
+
+// Colors
+$color-yellow: #FDEB9E;
+$color-teal-light: #7AE2CF;
+$color-teal: #077A7D;
+$color-dark: #06202B;
+$color-coral: #F2857A;
+$color-surface: color.mix($color-teal, $color-dark, 8%);   // tlo kolumny
+$color-surface-raised: color.mix($color-teal, $color-dark, 18%);  // tlo karty
+$color-border: color.mix($color-teal-light, $color-dark, 16%);
+$color-text: $color-yellow;
+$color-text-muted: color.mix($color-yellow, $color-dark, 64%);
+
+// Fonts
+$font-family-sans-serif: 'Inter', system-ui, -apple-system, sans-serif;
+$font-size-base: 1rem;
+$line-height-base: 1.6;
+
+// Borders
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-pill: 50rem;

@@ -65,6 +65,16 @@ class AppController extends Controller
     }
 
     /**
+     * Returns the logged in user's id, or null when nobody is authenticated.
+     *
+     * @return int|null
+     */
+    protected function currentUserId(): ?int
+    {
+        return $this->Authentication->getIdentity()?->getIdentifier();
+    }
+
+    /**
      * Makes the logged in user's avatar available to every template.
      *
      * @param \Cake\Event\EventInterface $event The beforeRender event.
@@ -76,6 +86,7 @@ class AppController extends Controller
 
         $userAvatar = null;
         $identity = $this->Authentication->getIdentity();
+        $userId = $this->currentUserId();
 
         if ($identity !== null) {
             $user = $this->fetchTable('Users')
@@ -87,7 +98,7 @@ class AppController extends Controller
             $userAvatar = $user?->avatar;
         }
 
-        $this->set(compact('userAvatar'));
+        $this->set(compact('userAvatar', 'userId'));
     }
 
     /**
