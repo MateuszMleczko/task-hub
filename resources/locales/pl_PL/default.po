@@ -141,3 +141,15 @@ msgstr "Średni"
 
 msgid "High"
 msgstr "Wysoki"
+
+msgid "Add Task"
+msgstr "Dodaj zadanie"
+
+msgid "Tasks"
+msgstr "Zadania"
+
+msgid "The task has been saved."
+msgstr "Zadanie zostało zapisane."
+
+msgid "The task could not be saved. Please, try again."
+msgstr "Nie udało się zapisać zadania. Spróbuj ponownie."

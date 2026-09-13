@@ -9,6 +9,9 @@ export default defineConfig({
             input: {
                 app: 'webroot/scss/app.scss',
                 bootstrap: 'webroot/js/app.js',
+                mainStyle: 'resources/css/main.scss',
+                tasksStyle: 'resources/css/tasks.scss',
+                usersStyle: 'resources/css/users.scss',
             },
             output: {
                 assetFileNames: 'css/[name][extname]',

@@ -11,6 +11,7 @@
     <title><?= $this->fetch('title') ?> | TaskHub</title>
     <?= $this->Html->meta('icon') ?>
     <link rel="stylesheet" href="/css/app.css">
+    <?= $this->Html->css('mainStyle') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">

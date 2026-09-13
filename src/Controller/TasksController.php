@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Enum\TaskStatusEnum;
+
 /**
  * Tasks Controller
  *
@@ -17,11 +19,22 @@ class TasksController extends AppController
      */
     public function index()
     {
-        $query = $this->Tasks->find()
-            ->contain(['Users']);
-        $tasks = $this->paginate($query);
+        $tasks = $this->Tasks
+            ->find()
+            ->where([
+                'Tasks.user_id' => $this->currentUserId(),
+            ])
+            ->contain(['Users'])
+            ->all();
 
-        $this->set(compact('tasks'));
+        $statuses = TaskStatusEnum::getStatuses();
+
+        $counts = [];
+        foreach ($tasks as $task) {
+            $counts[$task->status] = ($counts[$task->status] ?? 0) + 1;
+        }
+
+        $this->set(compact('tasks', 'statuses', 'counts'));
     }
 
     /**
