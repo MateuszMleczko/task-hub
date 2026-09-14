@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Enum\TaskPriorityEnum;
 use App\Enum\TaskStatusEnum;
 
 /**
@@ -27,14 +28,13 @@ class TasksController extends AppController
             ->contain(['Users'])
             ->all();
 
-        $statuses = TaskStatusEnum::getStatuses();
-
         $counts = [];
         foreach ($tasks as $task) {
             $counts[$task->status] = ($counts[$task->status] ?? 0) + 1;
         }
 
-        $this->set(compact('tasks', 'statuses', 'counts'));
+        $this->set($this->getLabels());
+        $this->set(compact('tasks', 'counts'));
     }
 
     /**
@@ -46,7 +46,9 @@ class TasksController extends AppController
      */
     public function view($id = null)
     {
-        $task = $this->Tasks->get($id, contain: ['Users']);
+        $task = $this->Tasks->get($id);
+
+        $this->set($this->getLabels());
         $this->set(compact('task'));
     }
 
@@ -67,8 +69,9 @@ class TasksController extends AppController
             }
             $this->Flash->error(__('The task could not be saved. Please, try again.'));
         }
-        $users = $this->Tasks->Users->find('list', limit: 200)->all();
-        $this->set(compact('task', 'users'));
+
+        $this->set('options', $this->getOptions());
+        $this->set(compact('task'));
     }
 
     /**
@@ -90,8 +93,9 @@ class TasksController extends AppController
             }
             $this->Flash->error(__('The task could not be saved. Please, try again.'));
         }
-        $users = $this->Tasks->Users->find('list', limit: 200)->all();
-        $this->set(compact('task', 'users'));
+
+        $this->set('options', $this->getOptions());
+        $this->set(compact('task'));
     }
 
     /**
@@ -112,5 +116,49 @@ class TasksController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Translated labels and css accent slugs for status / priority, keyed by enum value.
+     *
+     * @return array<string, array<int, string>>
+     */
+    private function getLabels(): array
+    {
+        return [
+            'statuses' => TaskStatusEnum::getStatuses(),
+            'priorities' => TaskPriorityEnum::getPriorities(),
+            'statusAccents' => TaskStatusEnum::getAccents(),
+            'priorityAccents' => TaskPriorityEnum::getAccents(),
+        ];
+    }
+
+    private function getOptions(): array
+    {
+        return [
+            'statuses' => $this->buildRadioOptions(TaskStatusEnum::getStatuses(), TaskStatusEnum::getAccents()),
+            'priorities' => $this->buildRadioOptions(TaskPriorityEnum::getPriorities(), TaskPriorityEnum::getAccents()),
+        ];
+    }
+
+    /**
+     * Builds FormHelper radio options with an accent modifier class per value (status / priority tiles).
+     *
+     * @param array<int, string> $labels Value => translated label.
+     * @param array<int, string> $accents Value => css modifier slug.
+     * @return array<int, array<string, mixed>>
+     */
+    private function buildRadioOptions(array $labels, array $accents): array
+    {
+        $options = [];
+        foreach ($labels as $value => $text) {
+            $options[] = [
+                'value' => $value,
+                'text' => $text,
+                'class' => 'task-form__tile-input task-form__tile-input--' . $accents[$value],
+            ];
+        }
+
+        return $options;
     }
 }

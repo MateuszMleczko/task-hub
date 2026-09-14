@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Entity;
 
+use App\Enum\TaskStatusEnum;
 use Cake\ORM\Entity;
 
 /**
@@ -19,6 +20,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\DateTime|null $modified
  *
  * @property \App\Model\Entity\User $user
+ * @property bool $is_overdue
  */
 class Task extends Entity
 {
@@ -42,4 +44,21 @@ class Task extends Entity
         'modified' => true,
         'user' => true,
     ];
+
+    /**
+     * Virtual fields included in toArray() / json output.
+     *
+     * @var array<string>
+     */
+    protected array $_virtual = ['is_overdue'];
+
+    /**
+     * True when the deadline has passed and the task is still not done.
+     */
+    protected function _getIsOverdue(): bool
+    {
+        return $this->deadline !== null
+            && $this->deadline->isPast()
+            && $this->status !== TaskStatusEnum::DONE;
+    }
 }

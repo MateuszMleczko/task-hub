@@ -21,4 +21,17 @@ Enum TaskStatusEnum: string
         ];
     }
 
+    /**
+     * Slug used as CSS modifier (e.g. tasks__column--todo) for each status.
+     */
+    public static function getAccents(): array
+    {
+        return [
+            self::TO_DO => 'todo',
+            self::IN_PROGRESS => 'progress',
+            self::BLOCKED => 'blocked',
+            self::DONE => 'done',
+        ];
+    }
+
 }
