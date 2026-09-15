@@ -3,3 +3,39 @@
 body {
     font-family: $font-family-sans-serif;
 }
+
+.avatar {
+    flex-shrink: 0;
+    border-radius: $border-radius-pill;
+    object-fit: cover;
+    background-color: $color-surface-raised;
+
+    &--small {
+        display: block;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 2px solid rgba($color-teal, 0.6);
+        transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    &--large {
+        position: relative;
+        width: 8.5rem;
+        height: 8.5rem;
+        outline: 3px solid $color-teal-light;
+        outline-offset: 4px;
+    }
+}
+
+@media (max-width: 36rem) {
+    .avatar--large {
+        width: 7rem;
+        height: 7rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .avatar--small {
+        transition: none;
+    }
+}
