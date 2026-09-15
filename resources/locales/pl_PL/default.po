@@ -228,3 +228,48 @@ msgstr "Utworzono"
 
 msgid "Modified"
 msgstr "Zmieniono"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Back to tasks"
+msgstr "Wróć do zadań"
+
+msgid "In TaskHub since {0}"
+msgstr "W TaskHub od {0}"
+
+msgid "Change password"
+msgstr "Zmień hasło"
+
+msgid "Delete completed"
+msgstr "Usuń ukończone"
+
+msgid "Are you sure you want to delete all completed tasks?"
+msgstr "Czy na pewno chcesz usunąć wszystkie ukończone zadania?"
+
+msgid "Completed tasks have been deleted."
+msgstr "Ukończone zadania zostały usunięte."
+
+msgid "All tasks"
+msgstr "Wszystkie zadania"
+
+msgid "{0} active"
+msgstr "Aktywnych: {0}"
+
+msgid "Completed"
+msgstr "Ukończone"
+
+msgid "{0} left to finish"
+msgstr "Do dokończenia: {0}"
+
+msgid "Completion rate"
+msgstr "Skuteczność"
+
+msgid "of all your tasks"
+msgstr "wszystkich Twoich zadań"
+
+msgid "Tasks by status"
+msgstr "Zadania według statusu"
+
+msgid "Deleting completed tasks failed. Try again later."
+msgstr "Usuwanie ukończonych zadań nie powiodło się. Spróbuj ponownie później."

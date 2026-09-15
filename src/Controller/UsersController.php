@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Enum\TaskStatusEnum;
 use App\Utility\TokensGenerator;
 use Cake\Http\Response;
 use Cake\I18n\DateTime;
@@ -212,14 +213,57 @@ class UsersController extends AppController
 
     public function profile()
     {
-        $user = $this->Authentication->getIdentity();
+        $user = $this->Users->get($this->currentUserId());
+
+        $counts = $this->Tasks->find()
+            ->select(['status', 'count' => 'COUNT(*)'])
+            ->where(['user_id' => $user->id])
+            ->groupBy('status')
+            ->all()
+            ->combine('status', 'count')
+            ->toArray();
+
+        $totalTasks = (int)array_sum($counts);
+        $doneTasks = (int)($counts[TaskStatusEnum::DONE] ?? 0);
+        $activeTasks = $totalTasks - $doneTasks;
+        $donePercent = $totalTasks > 0 ? (int)round($doneTasks / $totalTasks * 100) : 0;
+
         $userName = $user->name;
-        $userId = $user->id;
+        $userEmail = $user->email;
+        $memberSince = $user->created?->i18nFormat('d MMM yyyy');
+        $breakdown = $this->buildStatusBreakdown($counts);
 
-        $totalTasks = $this->Tasks->find()
-            ->where(['user_id' => $userId])
-            ->count();
+        $this->set(compact(
+            'userName',
+            'userEmail',
+            'memberSince',
+            'totalTasks',
+            'doneTasks',
+            'activeTasks',
+            'donePercent',
+            'breakdown',
+        ));
+    }
 
-        $this->set(compact('userName', 'totalTasks'));
+    /**
+     * Rows for the "tasks by status" bar / legend: translated label, css accent slug and count per status.
+     *
+     * @param array<int, int|string> $counts Status value => number of tasks.
+     * @return array<int, array<string, mixed>>
+     */
+    private function buildStatusBreakdown(array $counts): array
+    {
+        $accents = TaskStatusEnum::getAccents();
+
+        $breakdown = [];
+        foreach (TaskStatusEnum::getStatuses() as $value => $label) {
+            $breakdown[] = [
+                'label' => $label,
+                'accent' => $accents[$value],
+                'count' => (int)($counts[$value] ?? 0),
+            ];
+        }
+
+        return $breakdown;
     }
 }

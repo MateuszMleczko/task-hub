@@ -31,16 +31,7 @@
                 <?php if ($this->request->getAttribute('identity')): ?>
                     <li class="nav-item">
                         <a class="nav-link nav-link-avatar" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>">
-                            <?php if ($userAvatar !== null): ?>
-                                <?= $this->Html->image($userAvatar->storage_key, [
-                                    'alt' => __('Avatar'),
-                                    'width' => 40,
-                                    'height' => 40,
-                                    'class' => 'navbar-avatar',
-                                ]) ?>
-                            <?php else: ?>
-                                <i class="bi bi-person-circle me-1"></i><?= __('Profile') ?>
-                            <?php endif; ?>
+                            <?= $this->Profile->avatar($userAvatar, 'small') ?>
                         </a>
                     </li>
 

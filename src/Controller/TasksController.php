@@ -119,6 +119,29 @@ class TasksController extends AppController
     }
 
     /**
+     * Delete done method
+     *
+     * Removes every task of the logged in user that has the "Done" status.
+     *
+     * @return \Cake\Http\Response|null Redirects to profile.
+     */
+    public function deleteDone()
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        if ($this->Tasks->deleteAll([
+            'user_id' => $this->currentUserId(),
+            'status' => TaskStatusEnum::DONE,
+        ])) {
+            $this->Flash->success(__('Completed tasks have been deleted.'));
+        } else {
+            $this->Flash->error(__('Deleting completed tasks failed. Try again later.'));
+        }
+
+        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+    }
+
+    /**
      * Translated labels and css accent slugs for status / priority, keyed by enum value.
      *
      * @return array<string, array<int, string>>
