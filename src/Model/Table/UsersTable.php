@@ -94,8 +94,6 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
 
-        // Bez tego avatar_id=999 z podrobionego POST-a doleciałby do klucza obcego
-        // i wysypał się jako PDOException (500) zamiast komunikatu w formularzu.
         $rules->add($rules->existsIn(['avatar_id'], 'Avatars'), [
             'errorField' => 'avatar_id',
             'message' => __('Selected avatar does not exist.'),

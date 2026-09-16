@@ -259,8 +259,6 @@ class UsersController extends AppController
 
         $user = $this->Users->get($this->currentUserId());
 
-        // save() zamiast updateAll(), zeby zadzialala regula existsIn z UsersTable -
-        // podrobione avatar_id konczy sie komunikatem, a nie wyjatkiem klucza obcego.
         $this->Users->patchEntity(
             $user,
             ['avatar_id' => $this->request->getData('avatar_id')],
