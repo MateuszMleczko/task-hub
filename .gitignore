@@ -62,3 +62,4 @@ webroot/js/appJs.js
 webroot/css/fonts/
 node_modules/
 config/Migrations/*.lock
+webroot/js/*

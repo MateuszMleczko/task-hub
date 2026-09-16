@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Enum\TaskStatusEnum;
+use App\Model\Entity\User;
+use App\Utility\PasswordValidator;
 use App\Utility\TokensGenerator;
 use Cake\Http\Response;
 use Cake\I18n\DateTime;
@@ -73,22 +75,10 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
 
-            $password = $this->request->getData('password');
-            $confirmPassword = $this->request->getData('confirm_password');
-
-            $error = null;
-
-            if (empty($password) || empty($confirmPassword)) {
-                $error = __('Password and confirm password fields cannot be empty.');
-            } elseif ($password !== $confirmPassword) {
-                $error = __('Passwords do not match.');
-            } elseif (mb_strlen($password) < 8) {
-                $error = __('Password must be at least 8 characters long.');
-            } elseif (!preg_match('/[A-Z]/', $password)) {
-                $error = __('Password must contain at least one uppercase letter.');
-            } elseif (!preg_match('/[0-9]/', $password)) {
-                $error = __('Password must contain at least one number.');
-            }
+            $error = PasswordValidator::validate(
+                $this->request->getData('password'),
+                $this->request->getData('confirm_password'),
+            );
 
             if ($error !== null) {
                 $this->Flash->error($error);
@@ -130,30 +120,11 @@ class UsersController extends AppController
 
         if ($this->request->is('post')) {
             $newPassword = $this->request->getData('password');
-            $confirmPassword = $this->request->getData('confirm_password');
 
-            if (empty($newPassword) || empty($confirmPassword)) {
-                $this->Flash->error(__('Password and confirm password fields cannot be empty.'));
-                return null;
-            }
+            $error = PasswordValidator::validate($newPassword, $this->request->getData('confirm_password'));
+            if ($error !== null) {
+                $this->Flash->error($error);
 
-            if ($newPassword !== $confirmPassword) {
-                $this->Flash->error(__('Passwords do not match.'));
-                return null;
-            }
-
-            if (mb_strlen($newPassword) < 8) {
-                $this->Flash->error(__('Password must be at least 8 characters long.'));
-                return null;
-            }
-
-            if (!preg_match('/[A-Z]/', $newPassword)) {
-                $this->Flash->error(__('Password must contain at least one uppercase letter.'));
-                return null;
-            }
-
-            if (!preg_match('/[0-9]/', $newPassword)) {
-                $this->Flash->error(__('Password must contain at least one number.'));
                 return null;
             }
 
@@ -233,6 +204,11 @@ class UsersController extends AppController
         $memberSince = $user->created?->i18nFormat('d MMM yyyy');
         $breakdown = $this->buildStatusBreakdown($counts);
 
+        $avatars = $this->fetchTable('Avatars')
+            ->find()
+            ->where(['is_default' => 1])
+            ->all();
+
         $this->set(compact(
             'userName',
             'userEmail',
@@ -242,7 +218,75 @@ class UsersController extends AppController
             'activeTasks',
             'donePercent',
             'breakdown',
+            'avatars'
         ));
+    }
+
+    public function changePassword()
+    {
+        $user = $this->Users->get($this->currentUserId());
+
+        if ($this->request->is('post')) {
+            $newPassword = $this->request->getData('new_password');
+
+            if (!$this->isCurrentPasswordValid($user, $this->request->getData('current_password'))) {
+                $this->Flash->error(__('Current password is incorrect.'));
+
+                return null;
+            }
+
+            $error = PasswordValidator::validate($newPassword, $this->request->getData('confirm_password'));
+            if ($error !== null) {
+                $this->Flash->error($error);
+
+                return null;
+            }
+
+            $user->password = $newPassword;
+
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('Your password has been changed successfully.'));
+                return $this->redirect(['action' => 'profile']);
+            } else {
+                $this->Flash->error(__('Failed to change password. Please try again.'));
+            }
+        }
+    }
+
+    public function changeAvatar()
+    {
+        if ($this->request->is('post')) {
+            $user = $this->Users->get($this->currentUserId());
+            $avatarId = $this->request->getData('avatar_id');
+
+            if ($this->Users->updateAll(['avatar_id' => $avatarId], ['id' => $user->id])) {
+                $this->Flash->success(__('Your avatar has been changed successfully.'));
+            } else {
+                $this->Flash->error(__('Failed to change avatar. Please try again.'));
+            }
+
+            return $this->redirect(['action' => 'profile']);
+        }
+    }
+
+    /**
+     * Checks the plain text password against the user's hash using the hasher
+     * configured for the login form, so the hashing logic is never duplicated here.
+     *
+     * @param \App\Model\Entity\User $user Logged in user (loaded by id).
+     * @param string|null $password Plain text password to check.
+     * @return bool
+     */
+    private function isCurrentPasswordValid(User $user, ?string $password): bool
+    {
+        $hasher = $this->Authentication
+            ->getAuthenticationService()
+            ->authenticators()
+            ->get('Form')
+            ->getIdentifier()
+            ->getPasswordHasher();
+
+        return $hasher->check((string)$password, (string)$user->password);
     }
 
     /**

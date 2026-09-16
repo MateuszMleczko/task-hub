@@ -1,5 +1,6 @@
 <?php
     $this->Html->css('usersStyle', ['block' => true]);
+    $this->Html->script('users', ['block' => true]);
 ?>
 
 <div class="profile">
@@ -10,7 +11,12 @@
     ) ?>
 
     <section class="profile__header">
-        <?= $this->Profile->avatar($userAvatar) ?>
+        <button type="button" class="profile__avatar" data-avatar-popup-open aria-label="<?= __('Change avatar') ?>">
+            <?= $this->Profile->avatar($userAvatar) ?>
+            <span class="profile__avatar-edit" aria-hidden="true">
+                <i class="bi bi-pencil-fill"></i>
+            </span>
+        </button>
 
         <div class="profile__identity">
             <span class="profile__eyebrow"><?= __('Profile') ?></span>
@@ -99,3 +105,5 @@
         </ul>
     </section>
 </div>
+
+<?= $this->element('avatar_change_popup') ?>
