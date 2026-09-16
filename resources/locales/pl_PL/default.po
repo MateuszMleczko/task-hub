@@ -312,3 +312,33 @@ msgstr "Twój awatar został pomyślnie zmieniony."
 
 msgid "Failed to change avatar. Please try again."
 msgstr "Nie udało się zmienić awatara. Spróbuj ponownie."
+
+msgid "Welcome back"
+msgstr "Witaj ponownie"
+
+msgid "Log in to get back to your tasks."
+msgstr "Zaloguj się, aby wrócić do swoich zadań."
+
+msgid "Don't have an account?"
+msgstr "Nie masz jeszcze konta?"
+
+msgid "Create your account"
+msgstr "Załóż konto"
+
+msgid "A few details and you are ready to plan."
+msgstr "Kilka danych i możesz zacząć planować."
+
+msgid "At least 8 characters, one uppercase letter and one number."
+msgstr "Co najmniej 8 znaków, jedna wielka litera i jedna cyfra."
+
+msgid "Already have an account?"
+msgstr "Masz już konto?"
+
+msgid "Enter your email and we will send you a link to set a new password."
+msgstr "Podaj swój email, a wyślemy Ci link do ustawienia nowego hasła."
+
+msgid "Pick something strong you have not used before."
+msgstr "Wybierz silne hasło, którego wcześniej nie używałeś."
+
+msgid "Confirm your current password, then choose a new one."
+msgstr "Potwierdź aktualne hasło, a następnie ustaw nowe."
