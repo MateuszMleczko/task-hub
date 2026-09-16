@@ -91,7 +91,9 @@ class UsersController extends AppController
             }
         }
 
-        $this->set(compact('user', 'avatars'));
+        $selectedAvatarId = $user->avatar_id ?? $avatars->first()?->id;
+
+        $this->set(compact('user', 'avatars', 'selectedAvatarId'));
     }
 
     public function logout()

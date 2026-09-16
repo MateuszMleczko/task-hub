@@ -14,10 +14,10 @@
         </div>
 
         <div class="avatar-popup__body">
-            <div class="avatar-popup__grid">
+            <div class="avatar-picker">
                 <?php foreach ($avatars as $avatar): ?>
-                    <label class="avatar-popup__option">
-                        <input class="avatar-popup__input"
+                    <label class="avatar-picker__option">
+                        <input class="avatar-picker__input"
                                type="radio"
                                name="avatar_id"
                                value="<?= (int)$avatar->id ?>"
@@ -25,9 +25,9 @@
                         >
                         <?= $this->Html->image($avatar->storage_key, [
                             'alt' => __('Avatar'),
-                            'class' => 'avatar-popup__img',
+                            'class' => 'avatar-picker__img',
                         ]) ?>
-                        <span class="avatar-popup__check" aria-hidden="true">
+                        <span class="avatar-picker__check" aria-hidden="true">
                             <i class="bi bi-check-lg"></i>
                         </span>
                     </label>

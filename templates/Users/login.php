@@ -1,32 +1,58 @@
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <div class="card mt-5">
-            <div class="card-body">
-                <h3 class="card-title mb-4"><?= __('Login') ?></h3>
-                <?= $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login']]) ?>
-                <div class="mb-3">
-                    <?= $this->Form->control('email', [
-                        'label' => __('Email'),
-                        'class' => 'form-control',
-                        'required' => true,
-                    ]) ?>
-                </div>
-                <div class="mb-3">
-                    <?= $this->Form->control('password', [
-                        'label' => __('Password'),
-                        'type' => 'password',
-                        'class' => 'form-control',
-                        'required' => true,
-                    ]) ?>
-                </div>
-                <?= $this->Form->button(__('Login'), ['class' => 'btn btn-primary w-100']) ?>
-                <div class="text-center mt-3">
-                    <?= $this->Html->link(__('Forgot your password?'), $this->Url->build(['action' => 'forgotPassword']), ['class' => 'btn btn-link']) ?>
-                </div>
-                <?= $this->Form->end() ?>
-                <hr>
-                <?= $this->Html->link(__('Sign up'), $this->Url->build(['action' => 'register']), ['class' => 'btn btn-outline-primary w-100']) ?>
+<?php
+    $this->Html->css('usersStyle', ['block' => true]);
+?>
+
+<div class="auth">
+    <div class="auth__card">
+        <div class="auth__header">
+            <span class="auth__eyebrow">
+                <i class="bi bi-check2-square" aria-hidden="true"></i>TaskHub
+            </span>
+            <h1 class="auth__title"><?= __('Welcome back') ?></h1>
+            <p class="auth__subtitle"><?= __('Log in to get back to your tasks.') ?></p>
+        </div>
+
+        <?= $this->Form->create(null, [
+            'url' => ['controller' => 'Users', 'action' => 'login'],
+            'class' => 'auth__form',
+        ]) ?>
+            <div class="auth__field">
+                <label class="auth__label" for="email"><?= __('Email') ?></label>
+                <?= $this->Form->email('email', [
+                    'id' => 'email',
+                    'class' => 'auth__input',
+                    'placeholder' => 'you@example.com',
+                    'autocomplete' => 'email',
+                    'required' => true,
+                    'autofocus' => true,
+                ]) ?>
             </div>
+
+            <div class="auth__field">
+                <div class="auth__label-row">
+                    <label class="auth__label" for="password"><?= __('Password') ?></label>
+                    <?= $this->Html->link(
+                        __('Forgot your password?'),
+                        ['action' => 'forgotPassword'],
+                        ['class' => 'auth__link'],
+                    ) ?>
+                </div>
+                <?= $this->Form->password('password', [
+                    'id' => 'password',
+                    'class' => 'auth__input',
+                    'autocomplete' => 'current-password',
+                    'required' => true,
+                ]) ?>
+            </div>
+
+            <button type="submit" class="auth__submit">
+                <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i><?= __('Login') ?>
+            </button>
+        <?= $this->Form->end() ?>
+
+        <div class="auth__footer">
+            <?= __("Don't have an account?") ?>
+            <?= $this->Html->link(__('Sign up'), ['action' => 'register'], ['class' => 'auth__footer-link']) ?>
         </div>
     </div>
 </div>

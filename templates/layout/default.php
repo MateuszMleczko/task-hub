@@ -9,7 +9,7 @@
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $this->fetch('title') ?> | TaskHub</title>
-    <?= $this->Html->meta('icon') ?>
+    <?= $this->Html->meta('icon', '/favicon.svg', ['type' => 'image/svg+xml']) ?>
     <link rel="stylesheet" href="/css/app.css">
     <?= $this->Html->css('mainStyle') ?>
     <?= $this->fetch('meta') ?>
@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="<?= $this->Url->build('/') ?>">
-            <i class="bi bi-check2-square me-2"></i>TaskHub
+            <?= $this->Html->image('/favicon.svg', ['alt' => '', 'class' => 'navbar-brand__logo']) ?>TaskHub
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
             <span class="navbar-toggler-icon"></span>

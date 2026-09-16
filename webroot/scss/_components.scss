@@ -6,6 +6,9 @@
     padding: 1rem 0;
 
     .navbar-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
         color: $color-yellow;
         font-weight: 700;
         font-size: 1.4rem;
@@ -13,6 +16,17 @@
 
         &:hover {
             color: $color-teal-light;
+        }
+
+        &__logo {
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 0.375rem;
+            transition: transform 0.2s ease;
+        }
+
+        &:hover &__logo {
+            transform: rotate(-6deg) scale(1.05);
         }
     }
 

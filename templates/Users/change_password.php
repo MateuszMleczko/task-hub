@@ -1,41 +1,59 @@
-<div class="row justify-content-center">
-    <div class="col-md-4">
-        <div class="card mt-5">
-            <div class="card-body">
-                <h3 class="card-title mb-4"><?= __('Change password') ?></h3>
-                <?= $this->Form->create() ?>
-                <div class="mb-3">
-                    <?= $this->Form->control('current_password', [
-                        'label' => __('Current password'),
-                        'type' => 'password',
-                        'class' => 'form-control',
-                        'required' => true,
-                        'autocomplete' => 'current-password',
-                    ]) ?>
-                </div>
-                <div class="mb-3">
-                    <?= $this->Form->control('new_password', [
-                        'label' => __('New password'),
-                        'type' => 'password',
-                        'class' => 'form-control',
-                        'required' => true,
-                        'autocomplete' => 'new-password',
-                    ]) ?>
-                </div>
-                <div class="mb-3">
-                    <?= $this->Form->control('confirm_password', [
-                        'label' => __('Confirm new password'),
-                        'type' => 'password',
-                        'class' => 'form-control',
-                        'required' => true,
-                        'autocomplete' => 'new-password',
-                    ]) ?>
-                </div>
-                <?= $this->Form->button(__('Change password'), ['class' => 'btn btn-primary w-100']) ?>
-                <?= $this->Form->end() ?>
-                <hr>
-                <?= $this->Html->link(__('Back to profile'), $this->Url->build(['action' => 'profile']), ['class' => 'btn btn-outline-primary w-100']) ?>
-            </div>
+<?php
+    $this->Html->css('usersStyle', ['block' => true]);
+?>
+
+<div class="auth">
+    <div class="auth__card">
+        <?= $this->Html->link(
+            '<i class="bi bi-arrow-left" aria-hidden="true"></i>' . h(__('Back to profile')),
+            ['action' => 'profile'],
+            ['class' => 'auth__back', 'escape' => false],
+        ) ?>
+
+        <div class="auth__header">
+            <span class="auth__eyebrow">
+                <i class="bi bi-key" aria-hidden="true"></i><?= __('Profile') ?>
+            </span>
+            <h1 class="auth__title"><?= __('Change password') ?></h1>
+            <p class="auth__subtitle"><?= __('Confirm your current password, then choose a new one.') ?></p>
         </div>
+
+        <?= $this->Form->create(null, ['class' => 'auth__form']) ?>
+            <div class="auth__field">
+                <label class="auth__label" for="current_password"><?= __('Current password') ?></label>
+                <?= $this->Form->password('current_password', [
+                    'id' => 'current_password',
+                    'class' => 'auth__input',
+                    'autocomplete' => 'current-password',
+                    'required' => true,
+                    'autofocus' => true,
+                ]) ?>
+            </div>
+
+            <div class="auth__field">
+                <label class="auth__label" for="new_password"><?= __('New password') ?></label>
+                <?= $this->Form->password('new_password', [
+                    'id' => 'new_password',
+                    'class' => 'auth__input',
+                    'autocomplete' => 'new-password',
+                    'required' => true,
+                ]) ?>
+                <p class="auth__help"><?= __('At least 8 characters, one uppercase letter and one number.') ?></p>
+            </div>
+
+            <div class="auth__field">
+                <label class="auth__label" for="confirm_password"><?= __('Confirm new password') ?></label>
+                <?= $this->Form->password('confirm_password', [
+                    'id' => 'confirm_password',
+                    'class' => 'auth__input',
+                    'autocomplete' => 'new-password',
+                    'required' => true,
+                ]) ?>
+            </div>
+
+            <button type="submit" class="auth__submit">
+                <i class="bi bi-check2" aria-hidden="true"></i><?= __('Change password') ?>
+            </button>
+        <?= $this->Form->end() ?>
     </div>
 </div>
