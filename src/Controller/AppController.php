@@ -65,6 +65,46 @@ class AppController extends Controller
     }
 
     /**
+     * Returns the logged in user's id, or null when nobody is authenticated.
+     *
+     * @return int|null
+     */
+    protected function currentUserId(): ?int
+    {
+        return $this->Authentication->getIdentity()?->getIdentifier();
+    }
+
+    /**
+     * Makes the logged in user's avatar available to every template.
+     *
+     * @param \Cake\Event\EventInterface $event The beforeRender event.
+     * @return void
+     */
+    public function beforeRender(EventInterface $event): void
+    {
+        parent::beforeRender($event);
+
+        $userAvatar = null;
+        $userId = null;
+
+        if ($this->components()->has('Authentication')) {
+            $userId = $this->currentUserId();
+        }
+
+        if ($userId !== null) {
+            $user = $this->fetchTable('Users')
+                ->find()
+                ->where(['Users.id' => $userId])
+                ->contain('Avatars')
+                ->first();
+
+            $userAvatar = $user?->avatar;
+        }
+
+        $this->set(compact('userAvatar', 'userId'));
+    }
+
+    /**
      * Selects the active I18n locale based on the browser's Accept-Language header.
      *
      * Polish (`pl`) browsers get `pl_PL`, everything else falls back to `en_US`.

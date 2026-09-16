@@ -44,6 +44,11 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Avatars', [
+            'foreignKey' => 'avatar_id',
+            'joinType' => 'LEFT',
+        ]);
     }
 
     /**
@@ -70,6 +75,11 @@ class UsersTable extends Table
             ->requirePresence('confirm_password', 'create')
             ->notEmptyString('confirm_password');
 
+        $validator
+            ->integer('avatar_id')
+            ->requirePresence('avatar_id', 'create')
+            ->notEmptyString('avatar_id', __('Please choose an avatar.'));
+
         return $validator;
     }
 
@@ -83,6 +93,11 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
+
+        $rules->add($rules->existsIn(['avatar_id'], 'Avatars'), [
+            'errorField' => 'avatar_id',
+            'message' => __('Selected avatar does not exist.'),
+        ]);
 
         return $rules;
     }

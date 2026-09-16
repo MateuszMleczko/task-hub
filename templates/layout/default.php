@@ -9,8 +9,9 @@
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $this->fetch('title') ?> | TaskHub</title>
-    <?= $this->Html->meta('icon') ?>
+    <?= $this->Html->meta('icon', '/favicon.svg', ['type' => 'image/svg+xml']) ?>
     <link rel="stylesheet" href="/css/app.css">
+    <?= $this->Html->css('mainStyle') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +21,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="<?= $this->Url->build('/') ?>">
-            <i class="bi bi-check2-square me-2"></i>TaskHub
+            <?= $this->Html->image('/favicon.svg', ['alt' => '', 'class' => 'navbar-brand__logo']) ?>TaskHub
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
             <span class="navbar-toggler-icon"></span>
@@ -28,6 +29,12 @@
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav ms-auto">
                 <?php if ($this->request->getAttribute('identity')): ?>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-avatar" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>">
+                            <?= $this->Profile->avatar($userAvatar, 'small') ?>
+                        </a>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'logout']) ?>">
                             <i class="bi bi-box-arrow-right me-1"></i><?= __('Logout') ?>

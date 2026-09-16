@@ -9,7 +9,7 @@
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $this->fetch('title') ?> | TaskHub</title>
-    <?= $this->Html->meta('icon') ?>
+    <?= $this->Html->meta('icon', '/favicon.svg', ['type' => 'image/svg+xml']) ?>
     <link rel="stylesheet" href="/css/app.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">

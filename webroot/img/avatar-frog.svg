@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Frog avatar">
+  <rect width="200" height="200" fill="#1F3D2B"/>
+  <circle cx="100" cy="104" r="80" fill="#27503A"/>
+
+  <circle cx="70" cy="72" r="24" fill="#7ED957"/>
+  <circle cx="130" cy="72" r="24" fill="#7ED957"/>
+  <ellipse cx="100" cy="118" rx="58" ry="46" fill="#7ED957"/>
+  <ellipse cx="100" cy="142" rx="34" ry="17" fill="#A8E87F"/>
+  <circle cx="70" cy="70" r="15" fill="#FFFFFF"/>
+  <circle cx="130" cy="70" r="15" fill="#FFFFFF"/>
+  <circle cx="72" cy="72" r="7" fill="#17301F"/>
+  <circle cx="128" cy="72" r="7" fill="#17301F"/>
+  <circle cx="75" cy="68.5" r="2.4" fill="#FFFFFF"/>
+  <circle cx="131" cy="68.5" r="2.4" fill="#FFFFFF"/>
+  <circle cx="90" cy="104" r="3.2" fill="#17301F"/>
+  <circle cx="110" cy="104" r="3.2" fill="#17301F"/>
+  <path d="M64 116 Q100 148 136 116" stroke="#17301F" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+</svg>

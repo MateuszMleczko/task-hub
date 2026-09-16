@@ -67,14 +67,281 @@ msgstr "Rejestracja nie powiodła się. Spróbuj ponownie."
 msgid "Registration successful. You can now log in."
 msgstr "Rejestracja zakończona sukcesem. Teraz możesz się zalogować."
 
-msgid "Password must be at least 12 characters long."
-msgstr "Hasło musi mieć co najmniej 12 znaków."
+msgid "Password and confirm password fields cannot be empty."
+msgstr "Pola hasło i potwierdź hasło nie mogą być puste."
+
+msgid "Password must be at least {0} characters long."
+msgstr "Hasło musi mieć co najmniej {0} znaków."
 
 msgid "Password must contain at least one uppercase letter."
 msgstr "Hasło musi zawierać co najmniej jedną wielką literę."
 
-msgid "Password must contain at least one digit."
+msgid "Password must contain at least one number."
 msgstr "Hasło musi zawierać co najmniej jedną cyfrę."
 
 msgid "Passwords do not match."
 msgstr "Hasła nie są identyczne."
+
+msgid "Failed to send password reset email. Please try again later."
+msgstr "Nie udało się wysłać wiadomości e-mail z resetowaniem hasła. Spróbuj ponownie później."
+
+msgid "Set a new password"
+msgstr "Ustaw nowe hasło"
+
+msgid "Current password"
+msgstr "Aktualne hasło"
+
+msgid "New password"
+msgstr "Nowe hasło"
+
+msgid "Confirm new password"
+msgstr "Potwierdź nowe hasło"
+
+msgid "Save new password"
+msgstr "Zapisz nowe hasło"
+
+msgid "Back to login"
+msgstr "Powrót do logowania"
+
+msgid "If you provided a correct email address, reset link has been sent to your email."
+msgstr "Jeśli podałeś poprawny adres e-mail, link resetujący został wysłany na Twój e-mail."
+
+msgid "Reset your password"
+msgstr "Zresetuj swoje hasło"
+
+msgid "Send reset link"
+msgstr "Wyślij link resetujący"
+
+msgid "Your password has been reset successfully. You can now log in."
+msgstr "Twoje hasło zostało pomyślnie zresetowane. Teraz możesz się zalogować."
+
+msgid "Failed to reset password. Please try again."
+msgstr "Nie udało się zresetować hasła. Spróbuj ponownie."
+
+msgid "You have been logged out."
+msgstr "Zostałeś wylogowany."
+
+msgid "Avatar"
+msgstr "Awatar"
+
+msgid "To Do"
+msgstr "Do zrobienia"
+
+msgid "In Progress"
+msgstr "W trakcie"
+
+msgid "Blocked"
+msgstr "Zablokowane"
+
+msgid "Done"
+msgstr "Zrobione"
+
+msgid "Low"
+msgstr "Niski"
+
+msgid "Medium"
+msgstr "Średni"
+
+msgid "High"
+msgstr "Wysoki"
+
+msgid "Add Task"
+msgstr "Dodaj zadanie"
+
+msgid "Tasks"
+msgstr "Zadania"
+
+msgid "The task has been saved."
+msgstr "Zadanie zostało zapisane."
+
+msgid "The task could not be saved. Please, try again."
+msgstr "Nie udało się zapisać zadania. Spróbuj ponownie."
+
+msgid "Adding task"
+msgstr "Dodawanie zadania"
+
+msgid "Only the title is required — you can fill in the rest later."
+msgstr "Wystarczy tytuł — resztę możesz uzupełnić później."
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "What needs to be done?"
+msgstr "Co trzeba zrobić?"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Details, links, notes…"
+msgstr "Szczegóły, linki, notatki…"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Priority"
+msgstr "Priorytet"
+
+msgid "Deadline"
+msgstr "Termin"
+
+msgid "Leave it empty if the task has no deadline."
+msgstr "Zostaw puste, jeśli zadanie nie ma terminu."
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Edit"
+msgstr "Edytuj"
+
+msgid "Edit task"
+msgstr "Edytuj zadanie"
+
+msgid "Back to task"
+msgstr "Wróć do zadania"
+
+msgid "Save changes"
+msgstr "Zapisz zmiany"
+
+msgid "Delete task"
+msgstr "Usuń zadanie"
+
+msgid "Are you sure you want to delete this task?"
+msgstr "Czy na pewno chcesz usunąć to zadanie?"
+
+msgid "The task has been deleted."
+msgstr "Zadanie zostało usunięte."
+
+msgid "The task could not be deleted. Please, try again."
+msgstr "Nie udało się usunąć zadania. Spróbuj ponownie."
+
+msgid "Details"
+msgstr "Szczegóły"
+
+msgid "No description"
+msgstr "Brak opisu"
+
+msgid "No deadline"
+msgstr "Bez terminu"
+
+msgid "Overdue"
+msgstr "Po terminie"
+
+msgid "Created"
+msgstr "Utworzono"
+
+msgid "Modified"
+msgstr "Zmieniono"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Back to tasks"
+msgstr "Wróć do zadań"
+
+msgid "In TaskHub since {0}"
+msgstr "W TaskHub od {0}"
+
+msgid "Change password"
+msgstr "Zmień hasło"
+
+msgid "Delete completed"
+msgstr "Usuń ukończone"
+
+msgid "Are you sure you want to delete all completed tasks?"
+msgstr "Czy na pewno chcesz usunąć wszystkie ukończone zadania?"
+
+msgid "Completed tasks have been deleted."
+msgstr "Ukończone zadania zostały usunięte."
+
+msgid "All tasks"
+msgstr "Wszystkie zadania"
+
+msgid "{0} active"
+msgstr "Aktywnych: {0}"
+
+msgid "Completed"
+msgstr "Ukończone"
+
+msgid "{0} left to finish"
+msgstr "Do dokończenia: {0}"
+
+msgid "Completion rate"
+msgstr "Skuteczność"
+
+msgid "of all your tasks"
+msgstr "wszystkich Twoich zadań"
+
+msgid "Tasks by status"
+msgstr "Zadania według statusu"
+
+msgid "Deleting completed tasks failed. Try again later."
+msgstr "Usuwanie ukończonych zadań nie powiodło się. Spróbuj ponownie później."
+
+msgid "Back to profile"
+msgstr "Wróć do profilu"
+
+msgid "Your password has been changed successfully."
+msgstr "Twoje hasło zostało pomyślnie zmienione."
+
+msgid "Failed to change password. Please try again."
+msgstr "Nie udało się zmienić hasła. Spróbuj ponownie."
+
+msgid "Current password is incorrect."
+msgstr "Aktualne hasło jest nieprawidłowe."
+
+msgid "Invalid or expired password reset token."
+msgstr "Nieprawidłowy lub wygasły link do resetu hasła."
+
+msgid "Selected avatar does not exist."
+msgstr "Wybrany awatar nie istnieje."
+
+msgid "Change avatar"
+msgstr "Zmień awatar"
+
+msgid "Choose your avatar"
+msgstr "Wybierz swój awatar"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Your avatar has been changed successfully."
+msgstr "Twój awatar został pomyślnie zmieniony."
+
+msgid "Failed to change avatar. Please try again."
+msgstr "Nie udało się zmienić awatara. Spróbuj ponownie."
+
+msgid "Welcome back"
+msgstr "Witaj ponownie"
+
+msgid "Log in to get back to your tasks."
+msgstr "Zaloguj się, aby wrócić do swoich zadań."
+
+msgid "Don't have an account?"
+msgstr "Nie masz jeszcze konta?"
+
+msgid "Create your account"
+msgstr "Załóż konto"
+
+msgid "A few details and you are ready to plan."
+msgstr "Kilka danych i możesz zacząć planować."
+
+msgid "At least 8 characters, one uppercase letter and one number."
+msgstr "Co najmniej 8 znaków, jedna wielka litera i jedna cyfra."
+
+msgid "Already have an account?"
+msgstr "Masz już konto?"
+
+msgid "Enter your email and we will send you a link to set a new password."
+msgstr "Podaj swój email, a wyślemy Ci link do ustawienia nowego hasła."
+
+msgid "Pick something strong you have not used before."
+msgstr "Wybierz silne hasło, którego wcześniej nie używałeś."
+
+msgid "Confirm your current password, then choose a new one."
+msgstr "Potwierdź aktualne hasło, a następnie ustaw nowe."
+
+msgid "Please choose an avatar."
+msgstr "Wybierz awatar."

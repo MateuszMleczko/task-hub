@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Penguin avatar">
+  <rect width="200" height="200" fill="#9FD3E8"/>
+  <circle cx="100" cy="104" r="80" fill="#8AC6DF"/>
+
+  <ellipse cx="52" cy="112" rx="12" ry="34" fill="#1A2530" transform="rotate(14 52 112)"/>
+  <ellipse cx="148" cy="112" rx="12" ry="34" fill="#1A2530" transform="rotate(-14 148 112)"/>
+  <ellipse cx="80" cy="167" rx="15" ry="7.5" fill="#F5A623"/>
+  <ellipse cx="120" cy="167" rx="15" ry="7.5" fill="#F5A623"/>
+  <path d="M100 40 C134 40 154 70 154 106 C154 142 130 164 100 164 C70 164 46 142 46 106 C46 70 66 40 100 40 Z" fill="#23303D"/>
+  <ellipse cx="100" cy="124" rx="36" ry="40" fill="#FFFFFF"/>
+  <path d="M72 88 C72 70 85 60 100 60 C115 60 128 70 128 88 C128 105 115 114 100 114 C85 114 72 105 72 88 Z" fill="#FFFFFF"/>
+  <circle cx="86" cy="88" r="6" fill="#1A2530"/>
+  <circle cx="114" cy="88" r="6" fill="#1A2530"/>
+  <circle cx="88.2" cy="85.8" r="2.1" fill="#FFFFFF"/>
+  <circle cx="116.2" cy="85.8" r="2.1" fill="#FFFFFF"/>
+  <path d="M100 100 L113 111 L100 122 L87 111 Z" fill="#F5A623"/>
+
+</svg>

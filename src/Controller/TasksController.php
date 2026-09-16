@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Enum\TaskPriorityEnum;
+use App\Enum\TaskStatusEnum;
+use App\Model\Entity\Task;
+
 /**
  * Tasks Controller
  *
@@ -17,11 +21,21 @@ class TasksController extends AppController
      */
     public function index()
     {
-        $query = $this->Tasks->find()
-            ->contain(['Users']);
-        $tasks = $this->paginate($query);
+        $tasks = $this->Tasks
+            ->find()
+            ->where([
+                'Tasks.user_id' => $this->currentUserId(),
+            ])
+            ->contain(['Users'])
+            ->all();
 
-        $this->set(compact('tasks'));
+        $counts = [];
+        foreach ($tasks as $task) {
+            $counts[$task->status] = ($counts[$task->status] ?? 0) + 1;
+        }
+
+        $this->set($this->getLabels());
+        $this->set(compact('tasks', 'counts'));
     }
 
     /**
@@ -33,7 +47,9 @@ class TasksController extends AppController
      */
     public function view($id = null)
     {
-        $task = $this->Tasks->get($id, contain: ['Users']);
+        $task = $this->getOwnTask($id);
+
+        $this->set($this->getLabels());
         $this->set(compact('task'));
     }
 
@@ -47,6 +63,7 @@ class TasksController extends AppController
         $task = $this->Tasks->newEmptyEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
+            $task->user_id = $this->currentUserId();
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been saved.'));
 
@@ -54,8 +71,9 @@ class TasksController extends AppController
             }
             $this->Flash->error(__('The task could not be saved. Please, try again.'));
         }
-        $users = $this->Tasks->Users->find('list', limit: 200)->all();
-        $this->set(compact('task', 'users'));
+
+        $this->set('options', $this->getOptions());
+        $this->set(compact('task'));
     }
 
     /**
@@ -67,7 +85,7 @@ class TasksController extends AppController
      */
     public function edit($id = null)
     {
-        $task = $this->Tasks->get($id, contain: []);
+        $task = $this->getOwnTask($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
             if ($this->Tasks->save($task)) {
@@ -77,8 +95,9 @@ class TasksController extends AppController
             }
             $this->Flash->error(__('The task could not be saved. Please, try again.'));
         }
-        $users = $this->Tasks->Users->find('list', limit: 200)->all();
-        $this->set(compact('task', 'users'));
+
+        $this->set('options', $this->getOptions());
+        $this->set(compact('task'));
     }
 
     /**
@@ -91,7 +110,7 @@ class TasksController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $task = $this->Tasks->get($id);
+        $task = $this->getOwnTask($id);
         if ($this->Tasks->delete($task)) {
             $this->Flash->success(__('The task has been deleted.'));
         } else {
@@ -99,5 +118,85 @@ class TasksController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Delete done method
+     *
+     * Removes every task of the logged in user that has the "Done" status.
+     *
+     * @return \Cake\Http\Response|null Redirects to profile.
+     */
+    public function deleteDone()
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        if ($this->Tasks->deleteAll([
+            'user_id' => $this->currentUserId(),
+            'status' => TaskStatusEnum::DONE,
+        ])) {
+            $this->Flash->success(__('Completed tasks have been deleted.'));
+        } else {
+            $this->Flash->error(__('Deleting completed tasks failed. Try again later.'));
+        }
+
+        return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+    }
+
+    /**
+     * Translated labels and css accent slugs for status / priority, keyed by enum value.
+     *
+     * @return array<string, array<int, string>>
+     */
+    private function getLabels(): array
+    {
+        return [
+            'statuses' => TaskStatusEnum::getStatuses(),
+            'priorities' => TaskPriorityEnum::getPriorities(),
+            'statusAccents' => TaskStatusEnum::getAccents(),
+            'priorityAccents' => TaskPriorityEnum::getAccents(),
+        ];
+    }
+
+    private function getOptions(): array
+    {
+        return [
+            'statuses' => $this->buildRadioOptions(TaskStatusEnum::getStatuses(), TaskStatusEnum::getAccents()),
+            'priorities' => $this->buildRadioOptions(TaskPriorityEnum::getPriorities(), TaskPriorityEnum::getAccents()),
+        ];
+    }
+
+    /**
+     * Builds FormHelper radio options with an accent modifier class per value (status / priority tiles).
+     *
+     * @param array<int, string> $labels Value => translated label.
+     * @param array<int, string> $accents Value => css modifier slug.
+     * @return array<int, array<string, mixed>>
+     */
+    private function buildRadioOptions(array $labels, array $accents): array
+    {
+        $options = [];
+        foreach ($labels as $value => $text) {
+            $options[] = [
+                'value' => $value,
+                'text' => $text,
+                'class' => 'task-form__tile-input task-form__tile-input--' . $accents[$value],
+            ];
+        }
+
+        return $options;
+    }
+
+    /**
+     * Loads a task by id limited to the logged in user, so nobody can reach
+     * somebody else's task by changing the id in the url.
+     *
+     * @param string|null $id Task id.
+     * @return \App\Model\Entity\Task
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When the task is missing or belongs to another user.
+     */
+    private function getOwnTask(?string $id): Task
+    {
+        return $this->Tasks->get($id, conditions: ['Tasks.user_id' => $this->currentUserId()]);
     }
 }
