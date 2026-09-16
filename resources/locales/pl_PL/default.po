@@ -103,7 +103,7 @@ msgstr "Zapisz nowe hasło"
 msgid "Back to login"
 msgstr "Powrót do logowania"
 
-msgid "If you provided a correct email adres, reset link has been sent to your email."
+msgid "If you provided a correct email address, reset link has been sent to your email."
 msgstr "Jeśli podałeś poprawny adres e-mail, link resetujący został wysłany na Twój e-mail."
 
 msgid "Reset your password"
@@ -342,3 +342,6 @@ msgstr "Wybierz silne hasło, którego wcześniej nie używałeś."
 
 msgid "Confirm your current password, then choose a new one."
 msgstr "Potwierdź aktualne hasło, a następnie ustaw nowe."
+
+msgid "Please choose an avatar."
+msgstr "Wybierz awatar."

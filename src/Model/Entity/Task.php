@@ -34,7 +34,7 @@ class Task extends Entity
      * @var array<string, bool>
      */
     protected array $_accessible = [
-        'user_id' => true,
+        'user_id' => false,
         'title' => true,
         'description' => true,
         'status' => true,

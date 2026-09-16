@@ -69,7 +69,6 @@ class UsersController extends AppController
 
         $avatars = $this->fetchTable('Avatars')
             ->find()
-            ->where(['is_default' => 1])
             ->all();
 
         if ($this->request->is('post')) {
@@ -180,7 +179,7 @@ class UsersController extends AppController
                 }
             }
 
-            $this->Flash->success(__('If you provided a correct email adres, reset link has been sent to your email.'));
+            $this->Flash->success(__('If you provided a correct email address, reset link has been sent to your email.'));
         }
     }
 
@@ -208,7 +207,6 @@ class UsersController extends AppController
 
         $avatars = $this->fetchTable('Avatars')
             ->find()
-            ->where(['is_default' => 1])
             ->all();
 
         $this->set(compact(
@@ -255,20 +253,26 @@ class UsersController extends AppController
         }
     }
 
-    public function changeAvatar()
+    public function changeAvatar(): ?Response
     {
-        if ($this->request->is('post')) {
-            $user = $this->Users->get($this->currentUserId());
-            $avatarId = $this->request->getData('avatar_id');
+        $this->request->allowMethod(['post']);
 
-            if ($this->Users->updateAll(['avatar_id' => $avatarId], ['id' => $user->id])) {
-                $this->Flash->success(__('Your avatar has been changed successfully.'));
-            } else {
-                $this->Flash->error(__('Failed to change avatar. Please try again.'));
-            }
+        $user = $this->Users->get($this->currentUserId());
 
-            return $this->redirect(['action' => 'profile']);
+        $this->Users->patchEntity(
+            $user,
+            ['avatar_id' => $this->request->getData('avatar_id')],
+            ['fields' => ['avatar_id']],
+        );
+
+        if ($this->Users->save($user)) {
+            $this->Flash->success(__('Your avatar has been changed successfully.'));
+        } else {
+            $errors = $user->getError('avatar_id');
+            $this->Flash->error($errors ? reset($errors) : __('Failed to change avatar. Please try again.'));
         }
+
+        return $this->redirect(['action' => 'profile']);
     }
 
     /**

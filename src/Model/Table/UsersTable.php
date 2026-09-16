@@ -75,6 +75,11 @@ class UsersTable extends Table
             ->requirePresence('confirm_password', 'create')
             ->notEmptyString('confirm_password');
 
+        $validator
+            ->integer('avatar_id')
+            ->requirePresence('avatar_id', 'create')
+            ->notEmptyString('avatar_id', __('Please choose an avatar.'));
+
         return $validator;
     }
 
@@ -89,12 +94,7 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['email']), ['errorField' => 'email']);
 
-        // Bez tego avatar_id=999 z podrobionego POST-a doleciałby do klucza obcego
-        // i wysypał się jako PDOException (500) zamiast komunikatu w formularzu.
-        // allowNullableNulls: NULL jest w porządku - użytkownik nic nie wybrał.
-        $rules->add($rules->existsIn(['avatar_id'], 'Avatars', [
-            'allowNullableNulls' => true,
-        ]), [
+        $rules->add($rules->existsIn(['avatar_id'], 'Avatars'), [
             'errorField' => 'avatar_id',
             'message' => __('Selected avatar does not exist.'),
         ]);

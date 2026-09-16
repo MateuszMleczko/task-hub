@@ -77,6 +77,6 @@ class SeedDefaultAvatarsToAvatarsTable extends BaseMigration
 
     public function down(): void
     {
-        $this->execute('DELETE FROM avatars WHERE is_default = 1');
+        $this->execute('DELETE FROM avatars');
     }
 }

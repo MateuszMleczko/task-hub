@@ -85,13 +85,16 @@ class AppController extends Controller
         parent::beforeRender($event);
 
         $userAvatar = null;
-        $identity = $this->Authentication->getIdentity();
-        $userId = $this->currentUserId();
+        $userId = null;
 
-        if ($identity !== null) {
+        if ($this->components()->has('Authentication')) {
+            $userId = $this->currentUserId();
+        }
+
+        if ($userId !== null) {
             $user = $this->fetchTable('Users')
                 ->find()
-                ->where(['Users.id' => $identity->getIdentifier()])
+                ->where(['Users.id' => $userId])
                 ->contain('Avatars')
                 ->first();
 
