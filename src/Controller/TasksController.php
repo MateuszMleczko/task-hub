@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Enum\TaskPriorityEnum;
 use App\Enum\TaskStatusEnum;
+use App\Model\Entity\Task;
 
 /**
  * Tasks Controller
@@ -46,7 +47,7 @@ class TasksController extends AppController
      */
     public function view($id = null)
     {
-        $task = $this->Tasks->get($id);
+        $task = $this->getOwnTask($id);
 
         $this->set($this->getLabels());
         $this->set(compact('task'));
@@ -62,6 +63,7 @@ class TasksController extends AppController
         $task = $this->Tasks->newEmptyEntity();
         if ($this->request->is('post')) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
+            $task->user_id = $this->currentUserId();
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been saved.'));
 
@@ -83,7 +85,7 @@ class TasksController extends AppController
      */
     public function edit($id = null)
     {
-        $task = $this->Tasks->get($id, contain: []);
+        $task = $this->getOwnTask($id);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $task = $this->Tasks->patchEntity($task, $this->request->getData());
             if ($this->Tasks->save($task)) {
@@ -108,7 +110,7 @@ class TasksController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $task = $this->Tasks->get($id);
+        $task = $this->getOwnTask($id);
         if ($this->Tasks->delete($task)) {
             $this->Flash->success(__('The task has been deleted.'));
         } else {
@@ -183,5 +185,18 @@ class TasksController extends AppController
         }
 
         return $options;
+    }
+
+    /**
+     * Loads a task by id limited to the logged in user, so nobody can reach
+     * somebody else's task by changing the id in the url.
+     *
+     * @param string|null $id Task id.
+     * @return \App\Model\Entity\Task
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When the task is missing or belongs to another user.
+     */
+    private function getOwnTask(?string $id): Task
+    {
+        return $this->Tasks->get($id, conditions: ['Tasks.user_id' => $this->currentUserId()]);
     }
 }

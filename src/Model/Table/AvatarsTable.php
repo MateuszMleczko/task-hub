@@ -35,8 +35,6 @@ class AvatarsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-
-        // TAS-25 dopisze tu: $this->belongsTo('Users');
     }
 
     /**
@@ -51,10 +49,6 @@ class AvatarsTable extends Table
             ->scalar('storage_key')
             ->maxLength('storage_key', 255)
             ->notEmptyString('storage_key');
-
-        $validator
-            ->boolean('is_default')
-            ->notEmptyString('is_default');
 
         return $validator;
     }

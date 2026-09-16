@@ -74,8 +74,6 @@
             </div>
         </div>
 
-        <?= $this->Form->hidden('user_id', ['value' => $userId]) ?>
-
         <div class="task-form__footer">
             <div class="task-form__buttons">
                 <?= $this->Html->link(
