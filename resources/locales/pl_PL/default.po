@@ -67,13 +67,16 @@ msgstr "Rejestracja nie powiodła się. Spróbuj ponownie."
 msgid "Registration successful. You can now log in."
 msgstr "Rejestracja zakończona sukcesem. Teraz możesz się zalogować."
 
-msgid "Password must be at least 12 characters long."
-msgstr "Hasło musi mieć co najmniej 12 znaków."
+msgid "Password and confirm password fields cannot be empty."
+msgstr "Pola hasło i potwierdź hasło nie mogą być puste."
+
+msgid "Password must be at least {0} characters long."
+msgstr "Hasło musi mieć co najmniej {0} znaków."
 
 msgid "Password must contain at least one uppercase letter."
 msgstr "Hasło musi zawierać co najmniej jedną wielką literę."
 
-msgid "Password must contain at least one digit."
+msgid "Password must contain at least one number."
 msgstr "Hasło musi zawierać co najmniej jedną cyfrę."
 
 msgid "Passwords do not match."
@@ -84,6 +87,9 @@ msgstr "Nie udało się wysłać wiadomości e-mail z resetowaniem hasła. Spró
 
 msgid "Set a new password"
 msgstr "Ustaw nowe hasło"
+
+msgid "Current password"
+msgstr "Aktualne hasło"
 
 msgid "New password"
 msgstr "Nowe hasło"
@@ -99,9 +105,6 @@ msgstr "Powrót do logowania"
 
 msgid "If you provided a correct email adres, reset link has been sent to your email."
 msgstr "Jeśli podałeś poprawny adres e-mail, link resetujący został wysłany na Twój e-mail."
-
-msgid "Failed to send password reset email. Please try again later."
-msgstr "Nie udało się wysłać wiadomości e-mail z resetowaniem hasła. Spróbuj ponownie później."
 
 msgid "Reset your password"
 msgstr "Zresetuj swoje hasło"
@@ -273,3 +276,39 @@ msgstr "Zadania według statusu"
 
 msgid "Deleting completed tasks failed. Try again later."
 msgstr "Usuwanie ukończonych zadań nie powiodło się. Spróbuj ponownie później."
+
+msgid "Back to profile"
+msgstr "Wróć do profilu"
+
+msgid "Your password has been changed successfully."
+msgstr "Twoje hasło zostało pomyślnie zmienione."
+
+msgid "Failed to change password. Please try again."
+msgstr "Nie udało się zmienić hasła. Spróbuj ponownie."
+
+msgid "Current password is incorrect."
+msgstr "Aktualne hasło jest nieprawidłowe."
+
+msgid "Invalid or expired password reset token."
+msgstr "Nieprawidłowy lub wygasły link do resetu hasła."
+
+msgid "Selected avatar does not exist."
+msgstr "Wybrany awatar nie istnieje."
+
+msgid "Change avatar"
+msgstr "Zmień awatar"
+
+msgid "Choose your avatar"
+msgstr "Wybierz swój awatar"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Your avatar has been changed successfully."
+msgstr "Twój awatar został pomyślnie zmieniony."
+
+msgid "Failed to change avatar. Please try again."
+msgstr "Nie udało się zmienić awatara. Spróbuj ponownie."
