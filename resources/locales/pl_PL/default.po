@@ -345,3 +345,9 @@ msgstr "Potwierdź aktualne hasło, a następnie ustaw nowe."
 
 msgid "Please choose an avatar."
 msgstr "Wybierz awatar."
+
+msgid "Too many attempts. Please try again in {0} min."
+msgstr "Zbyt wiele prób. Spróbuj ponownie za {0} min."
+
+msgid "A password reset link has already been sent to your email. Please check your inbox or wait {0} minutes to create a new one"
+msgstr "Link resetujący został już wysłany na Twój e-mail. Sprawdź skrzynkę lub poczekaj {0} min, aby utworzyć nowy."
