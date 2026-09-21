@@ -135,6 +135,14 @@ $priority-accents: (
         line-height: 1;
         color: var(--task-accent);
     }
+
+    &__list {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        gap: 0.75rem;
+        min-height: 4.5rem;
+    }
 }
 
 .task-card {
@@ -148,6 +156,7 @@ $priority-accents: (
     align-items: center;
     gap: 0.375rem 0.5rem;
     padding: 0.875rem 1rem;
+    cursor: grab;
     border: 1px solid $color-border;
     border-radius: $border-radius;
     background-color: $color-surface-raised;
@@ -156,6 +165,27 @@ $priority-accents: (
     &:hover,
     &:focus-within {
         border-color: var(--task-accent);
+    }
+
+    &--ghost {
+        border-style: dashed;
+        border-color: var(--task-accent);
+        opacity: 0.4;
+    }
+
+    &--chosen {
+        cursor: grabbing;
+    }
+
+    &__link,
+    &__edit {
+        -webkit-user-drag: none;
+    }
+
+    &--drag {
+        border-color: var(--task-accent);
+        box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.35);
+        opacity: 1;
     }
 
     &:hover &__link {

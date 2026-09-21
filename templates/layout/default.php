@@ -59,7 +59,7 @@
     </div>
 </footer>
 
-<?= $this->Html->script(['bootstrap'], ['block' => false]) ?>
+<?= $this->Html->script(['bootstrap'], ['block' => false, 'type' => 'module']) ?>
 <?= $this->fetch('script') ?>
 </body>
 </html>

@@ -6,11 +6,11 @@
   "directories": {
     "test": "tests"
   },
-    "scripts": {
-        "copy:fonts": "copyfiles -f node_modules/bootstrap-icons/font/fonts/*.woff* webroot/css/fonts",
-        "build": "npm run copy:fonts && vite build",
-        "build:watch": "npm run copy:fonts && vite build --watch"
-    },
+  "scripts": {
+    "copy:fonts": "copyfiles -f node_modules/bootstrap-icons/font/fonts/*.woff* webroot/css/fonts",
+    "build": "npm run copy:fonts && vite build",
+    "build:watch": "npm run copy:fonts && vite build --watch"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MateuszMleczko/task-hub.git"
@@ -25,7 +25,8 @@
   "dependencies": {
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1",
-    "sass": "^1.100.0"
+    "sass": "^1.100.0",
+    "sortablejs": "^1.15.7"
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",

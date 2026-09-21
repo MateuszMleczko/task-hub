@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use App\Enum\TaskPriorityEnum;
+use App\Enum\TaskStatusEnum;
 use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -77,11 +79,13 @@ class TasksTable extends Table
 
         $validator
             ->integer('status')
-            ->notEmptyString('status');
+            ->notEmptyString('status')
+            ->inList('status', array_keys(TaskStatusEnum::getStatuses()));
 
         $validator
             ->integer('priority')
-            ->notEmptyString('priority');
+            ->notEmptyString('priority')
+            ->inList('priority', array_keys(TaskPriorityEnum::getPriorities()));
 
         $validator
             ->dateTime('deadline')
