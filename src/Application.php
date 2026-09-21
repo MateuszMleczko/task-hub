@@ -17,6 +17,8 @@ declare(strict_types=1);
 namespace App;
 
 use App\Middleware\HostHeaderMiddleware;
+use App\Middleware\LocaleMiddleware;
+use App\Middleware\RateLimitFlashMiddleware;
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Datasource\FactoryLocator;
@@ -25,6 +27,8 @@ use Cake\Event\EventManagerInterface;
 use Cake\Http\BaseApplication;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
+use Cake\Http\Middleware\RateLimitMiddleware;
+use Cake\Http\ServerRequest;
 use Cake\Http\MiddlewareQueue;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
@@ -74,6 +78,10 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // and make an error page/response
             ->add(new ErrorHandlerMiddleware(Configure::read('Error'), $this))
 
+            // Pick the locale before anything else, so even responses produced
+            // without a controller come out in the visitor's language.
+            ->add(new LocaleMiddleware())
+
             // Validate Host header to prevent Host Header Injection attacks.
             // In production, ensures App.fullBaseUrl is configured and validates
             // the incoming Host header against it.
@@ -95,6 +103,13 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // https://book.cakephp.org/5/en/controllers/middleware.html#body-parser-middleware
             ->add(new BodyParserMiddleware())
 
+            // Throttle the two forms worth brute forcing. Placed before the
+            // authentication middleware, so a refused attempt never reaches the
+            // deliberately slow password hashing.
+            ->add(new RateLimitFlashMiddleware())
+            ->add($this->ipRateLimit())
+            ->add($this->resetEmailRateLimit())
+
             ->add(new AuthenticationMiddleware($this))
 
             // Cross Site Request Forgery (CSRF) Protection Middleware
@@ -105,6 +120,82 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             ]));
 
         return $middlewareQueue;
+    }
+
+    /**
+     * Per IP throttle for the login and password reset forms.
+     *
+     * @return \Cake\Http\Middleware\RateLimitMiddleware
+     */
+    private function ipRateLimit(): RateLimitMiddleware
+    {
+        return new RateLimitMiddleware([
+            'headers' => false,
+            'skipCheck' => fn(ServerRequest $request): bool => $this->throttledAction($request) === null,
+            'limiterResolver' => fn(ServerRequest $request): ?string => $this->throttledAction($request),
+            /*
+             * The cache key is a hash of the identifier alone, so the action name has
+             * to be part of it - otherwise both forms would share a single counter.
+             *
+             * REMOTE_ADDR rather than the middleware's own IP lookup, which reads
+             * `X-Forwarded-For` straight off the request: anyone can send a fresh
+             * value with every attempt and get an empty bucket each time. Behind a
+             * proxy, swap this for a header the proxy itself overwrites.
+             */
+            'identifierCallback' => fn(ServerRequest $request): string => sprintf(
+                '%s:%s',
+                $this->throttledAction($request),
+                $request->getServerParams()['REMOTE_ADDR'] ?? 'unknown',
+            ),
+            'limiters' => [
+                'login' => ['limit' => 10, 'window' => 900],
+                'forgotPassword' => ['limit' => 5, 'window' => 3600],
+            ],
+            'message' => 'Too many attempts. Please try again later.',
+        ]);
+    }
+
+    /**
+     * Throttle on the address typed into the password reset form, so nobody can
+     * flood somebody else's inbox by sending the request from many addresses.
+     *
+     * @return \Cake\Http\Middleware\RateLimitMiddleware
+     */
+    private function resetEmailRateLimit(): RateLimitMiddleware
+    {
+        return new RateLimitMiddleware([
+            'headers' => false,
+            'limit' => 3,
+            'window' => 3600,
+            'skipCheck' => fn(ServerRequest $request): bool => $this->throttledAction($request) !== 'forgotPassword'
+                || !$request->getData('email'),
+            'identifierCallback' => fn(ServerRequest $request): string => 'reset-email:'
+                . mb_strtolower(trim((string)$request->getData('email'))),
+            'message' => 'Too many attempts. Please try again later.',
+        ]);
+    }
+
+    /**
+     * Name of the throttled action this request targets, or null when it targets
+     * neither of them.
+     *
+     * @param \Cake\Http\ServerRequest $request The request.
+     * @return string|null
+     */
+    private function throttledAction(ServerRequest $request): ?string
+    {
+        if ($request->getMethod() !== 'POST') {
+            return null;
+        }
+
+        $params = $request->getAttribute('params', []);
+        if (($params['controller'] ?? null) !== 'Users') {
+            return null;
+        }
+
+        $action = $params['action'] ?? null;
+
+        return in_array($action, ['login', 'forgotPassword'], true) ? $action : null;
     }
 
     /**

@@ -23,6 +23,10 @@ use Cake\Mailer\MailerAwareTrait;
 class UsersController extends AppController
 {
     use MailerAwareTrait;
+
+    private const RESET_TOKEN_LIFETIME = 60;
+    private const RESET_PASSWORD_LIMIT = 5;
+
     private $Users;
     private $RestorePasswordTokens;
     private $Tasks;
@@ -158,8 +162,21 @@ class UsersController extends AppController
                 ->first();
 
             if ($user) {
+                $existingToken = $this->RestorePasswordTokens
+                    ->find()
+                    ->where(['user_id' => $user->id])
+                    ->first();
+
+                $cooldownEnds = new DateTime(sprintf('+%d minutes', self::RESET_TOKEN_LIFETIME - self::RESET_PASSWORD_LIMIT),);
+
+                if ($existingToken && $existingToken->expires_at > $cooldownEnds) {
+                    $this->Flash->warning(__('A password reset link has already been sent to your email. Please check your inbox or wait {0} minutes to create a new one', self::RESET_PASSWORD_LIMIT));
+
+                    return;
+                }
+
                 $token = TokensGenerator::generateRandomString();
-                $expirationDate = new DateTime('+1 hour');
+                $expirationDate = new DateTime(sprintf('+%d minutes', self::RESET_TOKEN_LIFETIME));
 
                 $this->RestorePasswordTokens->deleteAll(['user_id' => $user->id]);
                 $restorePasswordToken = $this->RestorePasswordTokens->newEmptyEntity();
