@@ -97,6 +97,41 @@ if (file_exists(CONFIG . 'app_local.php')) {
 }
 
 /*
+ * Mark the session and CSRF cookies as `secure`, so the browser never sends them
+ * over plain http - not even on the first request of someone who typed the
+ * address without the scheme, which a server side http -> https redirect cannot
+ * prevent, because by then the cookie has already left the machine.
+ *
+ * CakePHP only does this by itself when it sees `env('HTTPS')`, which is absent
+ * whenever TLS is terminated by a proxy, so it is set explicitly here.
+ *
+ * On unless debug is on, so local development over http keeps working. Set
+ * HTTPS_ONLY=false for the rare production deployment that is served over http.
+ *
+ * Computed here rather than in config/app.php because it depends on `debug`,
+ * and config/app_local.php gets the final say on that just above.
+ */
+Configure::write(
+    'httpsOnly',
+    filter_var(env('HTTPS_ONLY', !Configure::read('debug')), FILTER_VALIDATE_BOOLEAN),
+);
+
+if (Configure::read('httpsOnly')) {
+    /*
+     * Only ever raises the setting, never lowers it, the way CakePHP does it too -
+     * so a php.ini that already turned this on is left alone.
+     *
+     * Written as a whole array on purpose: `Configure::write()` reads dots in a key
+     * as nesting, so the dotted path would produce `['session' => [...]]` instead of
+     * the flat `'session.cookie_secure'` key that ini_set() needs.
+     */
+    $sessionIni = (array)Configure::read('Session.ini');
+    $sessionIni['session.cookie_secure'] = '1';
+    Configure::write('Session.ini', $sessionIni);
+    unset($sessionIni);
+}
+
+/*
  * When debug = true the metadata cache should only last for a short time.
  */
 if (Configure::read('debug')) {
