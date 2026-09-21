@@ -10,6 +10,7 @@ export default defineConfig({
                 app: 'webroot/scss/app.scss',
                 bootstrap: 'webroot/js/app.js',
                 users: 'resources/js/users.js',
+                tasks: 'resources/js/tasks.js',
                 mainStyle: 'resources/css/main.scss',
                 tasksStyle: 'resources/css/tasks.scss',
                 usersStyle: 'resources/css/users.scss',
