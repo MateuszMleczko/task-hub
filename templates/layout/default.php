@@ -23,13 +23,18 @@
         <a class="navbar-brand" href="<?= $this->Url->build('/') ?>">
             <?= $this->Html->image('/favicon.svg', ['alt' => '', 'class' => 'navbar-brand__logo']) ?>TaskHub
         </a>
+        <?php if ($this->request->getAttribute('identity')): ?>
+            <a class="nav-link nav-link-avatar ms-auto me-2 d-lg-none" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>">
+                <?= $this->Profile->avatar($userAvatar, 'small') ?>
+            </a>
+        <?php endif; ?>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav ms-auto">
                 <?php if ($this->request->getAttribute('identity')): ?>
-                    <li class="nav-item">
+                    <li class="nav-item d-none d-lg-block">
                         <a class="nav-link nav-link-avatar" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>">
                             <?= $this->Profile->avatar($userAvatar, 'small') ?>
                         </a>
@@ -59,7 +64,7 @@
     </div>
 </footer>
 
-<?= $this->Html->script(['bootstrap'], ['block' => false]) ?>
+<?= $this->Html->script(['bootstrap'], ['block' => false, 'type' => 'module']) ?>
 <?= $this->fetch('script') ?>
 </body>
 </html>

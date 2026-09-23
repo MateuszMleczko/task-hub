@@ -18,7 +18,6 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
-use Cake\I18n\I18n;
 
 /**
  * Application Controller
@@ -51,17 +50,6 @@ class AppController extends Controller
          * see https://book.cakephp.org/5/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
-    }
-
-    /**
-     * @param \Cake\Event\EventInterface $event The beforeFilter event.
-     * @return void
-     */
-    public function beforeFilter(EventInterface $event): void
-    {
-        parent::beforeFilter($event);
-
-        $this->setLocaleFromBrowser();
     }
 
     /**
@@ -102,19 +90,5 @@ class AppController extends Controller
         }
 
         $this->set(compact('userAvatar', 'userId'));
-    }
-
-    /**
-     * Selects the active I18n locale based on the browser's Accept-Language header.
-     *
-     * Polish (`pl`) browsers get `pl_PL`, everything else falls back to `en_US`.
-     *
-     * @return void
-     */
-    protected function setLocaleFromBrowser(): void
-    {
-        $acceptLanguage = $this->request->getHeaderLine('Accept-Language');
-        $locale = str_starts_with(strtolower($acceptLanguage), 'pl') ? 'pl_PL' : 'en_US';
-        I18n::setLocale($locale);
     }
 }

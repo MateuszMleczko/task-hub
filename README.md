@@ -26,14 +26,36 @@ npm run build
 
 ### Database
 
+**1.** Create the database and the user:
+
 ```sql
 CREATE DATABASE task_hub CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE USER 'taskhub'@'localhost' IDENTIFIED BY 'taskhub';
 GRANT ALL PRIVILEGES ON task_hub.* TO 'taskhub'@'localhost';
 ```
 
-Set the connection details in `config/app_local.php` (`Datasources.default`: `username`, `password`, `database`),
-then run the migrations - they create the tables and seed the default avatars:
+**2.** `composer install` created `config/app_local.php` from the example file, so it still points
+at a placeholder database. Open it and set `Datasources.default` to the values used above:
+
+```php
+'Datasources' => [
+    'default' => [
+        'host' => 'localhost',
+        'username' => 'taskhub',
+        'password' => 'taskhub',
+        'database' => 'task_hub',
+        // ...
+    ],
+],
+```
+
+**3.** Verify the connection - this prints a table of migrations, all marked `down`:
+
+```bash
+bin/cake migrations status
+```
+
+**4.** Run the migrations - they create the tables and seed the default avatars:
 
 ```bash
 bin/cake migrations migrate
@@ -63,4 +85,4 @@ Configure `EmailTransport.default` in `config/app_local.php`; for local testing 
 bin/cake server -p 8765
 ```
 
-Open <http://localhost:8765>. The UI language (pl/en) follows the browser's `Accept-Language` header.
+Open <http://localhost:8765>

@@ -21,18 +21,19 @@ class TasksController extends AppController
      */
     public function index()
     {
-        $tasks = $this->Tasks
+        $groups = $this->Tasks
             ->find()
             ->where([
                 'Tasks.user_id' => $this->currentUserId(),
             ])
             ->contain(['Users'])
-            ->all();
+            ->all()
+            ->groupBy('status')
+            ->toArray();
 
-        $counts = [];
-        foreach ($tasks as $task) {
-            $counts[$task->status] = ($counts[$task->status] ?? 0) + 1;
-        }
+        $empty = array_fill_keys(array_keys(TaskStatusEnum::getStatuses()), []);
+        $tasks = array_replace($empty, $groups);
+        $counts = array_map('count', $tasks);
 
         $this->set($this->getLabels());
         $this->set(compact('tasks', 'counts'));
@@ -141,6 +142,31 @@ class TasksController extends AppController
         }
 
         return $this->redirect(['controller' => 'Users', 'action' => 'profile']);
+    }
+
+    /**
+     * Change status method
+     *
+     * Moves a task to another board column.
+     *
+     * @param string|null $id Task id.
+     * @return \Cake\Http\Response Json payload telling whether the status was changed.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When the task is missing or belongs to another user.
+     */
+    public function changeStatus($id = null)
+    {
+        $this->request->allowMethod(['post']);
+
+        $task = $this->getOwnTask($id);
+        $task = $this->Tasks->patchEntity($task, [
+            'status' => $this->request->getData('status'),
+        ]);
+        $saved = (bool)$this->Tasks->save($task);
+
+        return $this->response
+            ->withStatus($saved ? 200 : 422)
+            ->withType('application/json')
+            ->withStringBody((string)json_encode(['success' => $saved]));
     }
 
     /**

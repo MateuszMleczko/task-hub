@@ -1,6 +1,6 @@
 <?php
     $this->Html->css('usersStyle', ['block' => true]);
-    $this->Html->script('users', ['block' => true]);
+    $this->Html->script('users', ['block' => true, 'type' => 'module']);
 ?>
 
 <div class="profile">
