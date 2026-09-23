@@ -40,9 +40,6 @@ class Task extends Entity
         'status' => true,
         'priority' => true,
         'deadline' => true,
-        'created' => true,
-        'modified' => true,
-        'user' => true,
     ];
 
     /**
