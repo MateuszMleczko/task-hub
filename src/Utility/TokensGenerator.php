@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Utility;
 
+use Cake\Utility\Security;
 use Random\RandomException;
 
 /**
@@ -11,6 +12,15 @@ use Random\RandomException;
 class TokensGenerator
 {
     private const CHARACTERS = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    /**
+     * @param string $token
+     * @return string
+     */
+    public static function hash(string $token): string
+    {
+        return hash_hmac('sha256', $token, Security::getSalt());
+    }
 
     /**
      * @throws RandomException

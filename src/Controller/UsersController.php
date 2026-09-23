@@ -115,7 +115,7 @@ class UsersController extends AppController
 
         $restorePasswordToken = $this->RestorePasswordTokens
             ->find()
-            ->where(['token' => $token])
+            ->where(['token' => TokensGenerator::hash($token)])
             ->first();
 
         if (!$restorePasswordToken || $restorePasswordToken->expires_at < new DateTime()) {
@@ -181,7 +181,7 @@ class UsersController extends AppController
                 $this->RestorePasswordTokens->deleteAll(['user_id' => $user->id]);
                 $restorePasswordToken = $this->RestorePasswordTokens->newEmptyEntity();
                 $restorePasswordToken->user_id = $user->id;
-                $restorePasswordToken->token = $token;
+                $restorePasswordToken->token = TokensGenerator::hash($token);
                 $restorePasswordToken->expires_at = $expirationDate;
 
                 if ($this->RestorePasswordTokens->save($restorePasswordToken)) {
