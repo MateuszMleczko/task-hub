@@ -32,8 +32,6 @@ class User extends Entity
         'email' => true,
         'password' => true,
         'avatar_id' => true,
-        'created' => true,
-        'modified' => true,
     ];
 
     protected array $_hidden = ['password'];
