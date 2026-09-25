@@ -263,6 +263,7 @@ class UsersController extends AppController
             $user->password = $newPassword;
 
             if ($this->Users->save($user)) {
+                $this->Authentication->setIdentity($user);
                 $this->Flash->success(__('Your password has been changed successfully.'));
                 return $this->redirect(['action' => 'profile']);
             } else {
