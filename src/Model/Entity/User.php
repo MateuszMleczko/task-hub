@@ -13,6 +13,7 @@ use Authentication\PasswordHasher\DefaultPasswordHasher;
  * $property string|null $name
  * @property string $email
  * @property string|null $password
+ * @property \Cake\I18n\DateTime|null $privacy_policy_accepted_at
  * @property \Cake\I18n\DateTime|null $created
  * @property \Cake\I18n\DateTime|null $modified
  */

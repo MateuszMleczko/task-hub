@@ -56,6 +56,7 @@ webroot/css/app.css
 webroot/css/mainStyle.css
 webroot/css/tasksStyle.css
 webroot/css/usersStyle.css
+webroot/css/legalStyle.css
 webroot/css/app.css.map
 webroot/js/bootstrap.js
 webroot/js/appJs.js

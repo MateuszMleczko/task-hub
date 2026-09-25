@@ -49,6 +49,14 @@ class UsersTable extends Table
             'foreignKey' => 'avatar_id',
             'joinType' => 'LEFT',
         ]);
+        $this->hasMany('Tasks', [
+            'foreignKey' => 'user_id',
+            'dependent' => true,
+        ]);
+        $this->hasMany('RestorePasswordTokens', [
+            'foreignKey' => 'user_id',
+            'dependent' => true,
+        ]);
     }
 
     /**
@@ -79,6 +87,10 @@ class UsersTable extends Table
             ->integer('avatar_id')
             ->requirePresence('avatar_id', 'create')
             ->notEmptyString('avatar_id', __('Please choose an avatar.'));
+
+        $validator
+            ->requirePresence('privacy_policy', 'create', __('You must accept the privacy policy.'))
+            ->equals('privacy_policy', '1', __('You must accept the privacy policy.'));
 
         return $validator;
     }

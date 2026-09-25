@@ -164,6 +164,30 @@
         }
     }
 
+    &__consent {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.625rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: $color-text-muted;
+        cursor: pointer;
+    }
+
+    &__checkbox {
+        flex-shrink: 0;
+        width: 1.125rem;
+        height: 1.125rem;
+        margin: 0.125rem 0 0;
+        accent-color: $color-teal-light;
+        cursor: pointer;
+
+        &:focus-visible {
+            outline: 2px solid $color-teal-light;
+            outline-offset: 2px;
+        }
+    }
+
     &__link {
         font-size: 0.8125rem;
         font-weight: 500;
@@ -181,6 +205,10 @@
             outline: 2px solid $color-teal-light;
             outline-offset: 2px;
             border-radius: 2px;
+        }
+
+        &--inline {
+            font-size: inherit;
         }
     }
 
