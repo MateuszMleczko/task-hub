@@ -14,6 +14,7 @@ use Authentication\PasswordHasher\DefaultPasswordHasher;
  * @property string $email
  * @property string|null $password
  * @property \Cake\I18n\DateTime|null $privacy_policy_accepted_at
+ * @property int $session_version
  * @property \Cake\I18n\DateTime|null $created
  * @property \Cake\I18n\DateTime|null $modified
  */

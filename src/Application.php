@@ -236,7 +236,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             'unauthenticatedRedirect' => '/users/login',
             'queryParam' => 'redirect',
             'authenticators' => [
-                'Authentication.PrimaryKeySession',
+                'VersionedSession',
                 'Authentication.Form' => [
                     'fields' => $fields,
                     'loginUrl' => '/users/login',
