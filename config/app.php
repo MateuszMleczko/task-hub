@@ -82,6 +82,19 @@ return [
     ],
 
     /*
+     * Data controller shown on the privacy policy page (GDPR art. 13).
+     *
+     * - administrator - Full name (or company name) of the site owner.
+     * - address - Postal address of the administrator.
+     * - contactEmail - Address that handles privacy requests.
+     */
+    'PrivacyPolicy' => [
+        'administrator' => env('PRIVACY_ADMINISTRATOR'),
+        'address' => env('PRIVACY_ADDRESS'),
+        'contactEmail' => env('PRIVACY_CONTACT_EMAIL'),
+    ],
+
+    /*
      * Apply timestamps with the last modified time to static assets (js, css, images).
      * Will append a querystring parameter containing the time the file was modified.
      * This is useful for busting browser caches.

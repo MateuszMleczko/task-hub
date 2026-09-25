@@ -14,6 +14,7 @@ export default defineConfig({
                 mainStyle: 'resources/css/main.scss',
                 tasksStyle: 'resources/css/tasks.scss',
                 usersStyle: 'resources/css/users.scss',
+                legalStyle: 'resources/css/legal.scss',
             },
             output: {
                 assetFileNames: 'css/[name][extname]',

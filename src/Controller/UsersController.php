@@ -77,6 +77,7 @@ class UsersController extends AppController
 
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user->privacy_policy_accepted_at = new DateTime();
 
             $error = PasswordValidator::validate(
                 $this->request->getData('password'),
@@ -288,6 +289,24 @@ class UsersController extends AppController
             $errors = $user->getError('avatar_id');
             $this->Flash->error($errors ? reset($errors) : __('Failed to change avatar. Please try again.'));
         }
+
+        return $this->redirect(['action' => 'profile']);
+    }
+
+    public function deleteAccount(): ?Response
+    {
+        $this->request->allowMethod(['post']);
+
+        $user = $this->Users->get($this->currentUserId());
+
+        if ($this->Users->delete($user)) {
+            $this->Authentication->logout();
+            $this->Flash->success(__('Your account has been deleted successfully.'));
+
+            return $this->redirect(['action' => 'login']);
+        }
+
+        $this->Flash->error(__('Failed to delete account. Please try again.'));
 
         return $this->redirect(['action' => 'profile']);
     }

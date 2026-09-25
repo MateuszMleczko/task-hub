@@ -58,7 +58,12 @@
 
 <footer class="py-3 mt-auto">
     <div class="container text-center">
-        <small style="color: rgba(253, 235, 158, 0.4);">TaskHub &copy; <?= date('Y') ?></small>
+        <small style="color: rgba(253, 235, 158, 0.4);">
+            TaskHub &copy; <?= date('Y') ?> &middot;
+            <?= $this->Html->link(__('Privacy policy'), ['controller' => 'Legal', 'action' => 'privacy'], [
+                'style' => 'color: inherit;',
+            ]) ?>
+        </small>
     </div>
 </footer>
 

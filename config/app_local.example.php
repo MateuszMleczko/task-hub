@@ -32,6 +32,16 @@ return [
     ],
 
     /*
+     * Data controller shown on the privacy policy page (/privacy-policy).
+     * Test values - replace with the real ones before deploying to production.
+     */
+    'PrivacyPolicy' => [
+        'administrator' => 'Jan Kowalski',
+        'address' => 'ul. Przykładowa 1, 00-001 Warszawa',
+        'contactEmail' => 'privacy@example.com',
+    ],
+
+    /*
      * Connection information used by the ORM to connect
      * to your application's datastores.
      *
