@@ -86,3 +86,11 @@ bin/cake server -p 8765
 ```
 
 Open <http://localhost:8765>
+
+## License
+
+TaskHub is released under the [MIT License](LICENSE), © 2026 Mateusz Mleczko
+
+Third-party front-end packages keep their own licenses. `npm run build` writes their notices to
+`webroot/THIRD_PARTY_LICENSES.md` (Bootstrap, Popper, SortableJS) and `webroot/css/fonts/`
+(Bootstrap Icons, Inter - SIL Open Font License 1.1).

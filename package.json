@@ -8,16 +8,17 @@
   },
   "scripts": {
     "copy:fonts": "copyfiles -f node_modules/bootstrap-icons/font/fonts/*.woff* node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2 node_modules/@fontsource-variable/inter/files/inter-latin-ext-wght-normal.woff2 webroot/css/fonts",
-    "build": "npm run copy:fonts && vite build",
-    "build:watch": "npm run copy:fonts && vite build --watch"
+    "copy:licenses": "node -e \"const fs = require('fs'); fs.copyFileSync('node_modules/bootstrap-icons/LICENSE', 'webroot/css/fonts/bootstrap-icons-LICENSE.txt'); fs.copyFileSync('node_modules/@fontsource-variable/inter/LICENSE', 'webroot/css/fonts/inter-LICENSE.txt');\"",
+    "build": "npm run copy:fonts && npm run copy:licenses && vite build",
+    "build:watch": "npm run copy:fonts && npm run copy:licenses && vite build --watch"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MateuszMleczko/task-hub.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Mateusz Mleczko",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/MateuszMleczko/task-hub/issues"
   },
