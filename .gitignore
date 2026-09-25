@@ -61,6 +61,7 @@ webroot/css/app.css.map
 webroot/js/bootstrap.js
 webroot/js/appJs.js
 webroot/css/fonts/
+webroot/THIRD_PARTY_LICENSES.md
 node_modules/
 config/Migrations/*.lock
 webroot/js/*
