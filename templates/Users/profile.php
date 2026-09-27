@@ -48,6 +48,15 @@
                     ]
                 ) ?>
             <?php endif; ?>
+            <?= $this->Form->postLink(
+                '<i class="bi bi-person-x" aria-hidden="true"></i>' . h(__('Delete account')),
+                ['controller' => 'Users', 'action' => 'deleteAccount'],
+                [
+                    'class' => 'profile__btn profile__btn--danger',
+                    'escape' => false,
+                    'confirm' => __('Are you sure you want to delete your account? This action cannot be undone.'),
+                ]
+            ) ?>
         </div>
     </section>
 

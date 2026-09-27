@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use ArrayObject;
+use Cake\Datasource\EntityInterface;
+use Cake\Event\EventInterface;
 use Cake\ORM\Query\SelectQuery;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -49,6 +52,14 @@ class UsersTable extends Table
             'foreignKey' => 'avatar_id',
             'joinType' => 'LEFT',
         ]);
+        $this->hasMany('Tasks', [
+            'foreignKey' => 'user_id',
+            'dependent' => true,
+        ]);
+        $this->hasMany('RestorePasswordTokens', [
+            'foreignKey' => 'user_id',
+            'dependent' => true,
+        ]);
     }
 
     /**
@@ -80,6 +91,10 @@ class UsersTable extends Table
             ->requirePresence('avatar_id', 'create')
             ->notEmptyString('avatar_id', __('Please choose an avatar.'));
 
+        $validator
+            ->requirePresence('privacy_policy', 'create', __('You must accept the privacy policy.'))
+            ->equals('privacy_policy', '1', __('You must accept the privacy policy.'));
+
         return $validator;
     }
 
@@ -100,5 +115,21 @@ class UsersTable extends Table
         ]);
 
         return $rules;
+    }
+
+    /**
+     * Bumps `session_version` whenever an existing user's password changes, which
+     * signs them out on every device, see \App\Authenticator\VersionedSessionAuthenticator.
+     *
+     * @param \Cake\Event\EventInterface $event The beforeSave event.
+     * @param \App\Model\Entity\User $entity The user being saved.
+     * @param \ArrayObject $options Save options.
+     * @return void
+     */
+    public function beforeSave(EventInterface $event, EntityInterface $entity, ArrayObject $options): void
+    {
+        if (!$entity->isNew() && $entity->isDirty('password')) {
+            $entity->set('session_version', (int)$entity->get('session_version') + 1);
+        }
     }
 }

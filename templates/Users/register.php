@@ -84,6 +84,25 @@
                 <?= $this->Form->error('confirm_password') ?>
             </div>
 
+            <div class="auth__field">
+                <label class="auth__consent" for="privacy_policy">
+                    <?= $this->Form->checkbox('privacy_policy', [
+                        'id' => 'privacy_policy',
+                        'class' => 'auth__checkbox',
+                        'required' => true,
+                    ]) ?>
+                    <span>
+                        <?= __('I have read and accept the') ?>
+                        <?= $this->Html->link(__('privacy policy'), ['controller' => 'Legal', 'action' => 'privacy'], [
+                            'class' => 'auth__link auth__link--inline',
+                            'target' => '_blank',
+                            'rel' => 'noopener',
+                        ]) ?>
+                    </span>
+                </label>
+                <?= $this->Form->error('privacy_policy') ?>
+            </div>
+
             <button type="submit" class="auth__submit">
                 <i class="bi bi-person-plus" aria-hidden="true"></i><?= __('Sign up') ?>
             </button>

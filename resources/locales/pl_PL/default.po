@@ -351,3 +351,28 @@ msgstr "Zbyt wiele prób. Spróbuj ponownie za {0} min."
 
 msgid "A password reset link has already been sent to your email. Please check your inbox or wait {0} minutes to create a new one"
 msgstr "Link resetujący został już wysłany na Twój e-mail. Sprawdź skrzynkę lub poczekaj {0} min, aby utworzyć nowy."
+
+msgid "You must accept the privacy policy."
+msgstr "Musisz zaakceptować politykę prywatności."
+
+msgid "I have read and accept the"
+msgstr "Zapoznałem(-am) się i akceptuję"
+
+msgid "privacy policy"
+msgstr "politykę prywatności"
+
+msgid "Privacy policy"
+msgstr "Polityka prywatności"
+
+msgid "Are you sure you want to delete your account? This action cannot be undone."
+msgstr "Czy na pewno chcesz usunąć swoje konto? Ta akcja jest nieodwracalna."
+
+msgid "Delete account"
+msgstr "Usuń konto"
+
+msgid "Your account has been deleted successfully."
+msgstr "Twoje konto zostało pomyślnie usunięte."
+
+msgid "Failed to delete account. Please try again."
+msgstr "Nie udało się usunąć konta. Spróbuj ponownie."
+

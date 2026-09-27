@@ -1,6 +1,9 @@
 // Abstracts
 @use 'variables' as *;
 
+// Fonts
+@use 'fonts';
+
 // Bootstrap
 @use '../../node_modules/bootstrap/scss/bootstrap' with (
   $primary: $color-teal,

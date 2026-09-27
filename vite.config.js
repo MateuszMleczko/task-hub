@@ -5,6 +5,9 @@ export default defineConfig({
     build: {
         outDir: 'webroot',
         emptyOutDir: false,
+        // Bundled Bootstrap, Popper and SortableJS are MIT licensed, which requires
+        // their notices to ship with every copy - minification strips them from the bundles.
+        license: { fileName: 'THIRD_PARTY_LICENSES.md' },
         rollupOptions: {
             input: {
                 app: 'webroot/scss/app.scss',
@@ -14,6 +17,7 @@ export default defineConfig({
                 mainStyle: 'resources/css/main.scss',
                 tasksStyle: 'resources/css/tasks.scss',
                 usersStyle: 'resources/css/users.scss',
+                legalStyle: 'resources/css/legal.scss',
             },
             output: {
                 assetFileNames: 'css/[name][extname]',
