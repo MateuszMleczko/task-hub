@@ -29,6 +29,17 @@ class PasswordValidator
             return __('Passwords do not match.');
         }
 
+        return self::strengthError($password);
+    }
+
+    /**
+     * Returns the first strength rule the password breaks, or null when it is strong enough.
+     *
+     * @param string $password New password.
+     * @return string|null
+     */
+    public static function strengthError(string $password): ?string
+    {
         if (mb_strlen($password) < self::MIN_LENGTH) {
             return __('Password must be at least {0} characters long.', self::MIN_LENGTH);
         }

@@ -79,14 +79,7 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->getData());
             $user->privacy_policy_accepted_at = new DateTime();
 
-            $error = PasswordValidator::validate(
-                $this->request->getData('password'),
-                $this->request->getData('confirm_password'),
-            );
-
-            if ($error !== null) {
-                $this->Flash->error($error);
-            } elseif ($this->Users->save($user)) {
+            if ($this->Users->save($user)) {
                 $this->Flash->success(__('Registration successful. You can now log in.'));
 
                 return $this->redirect(['action' => 'login']);

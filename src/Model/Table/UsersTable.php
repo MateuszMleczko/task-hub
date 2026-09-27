@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Model\Table;
 
+use App\Utility\PasswordValidator;
 use ArrayObject;
 use Cake\Datasource\EntityInterface;
 use Cake\Event\EventInterface;
@@ -32,6 +33,10 @@ use Cake\Validation\Validator;
  */
 class UsersTable extends Table
 {
+    public const NAME_MIN_LENGTH = 2;
+    public const NAME_MAX_LENGTH = 50;
+    public const EMAIL_MAX_LENGTH = 255;
+
     /**
      * Initialize method
      *
@@ -70,21 +75,54 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator): Validator
     {
-        $validator
-            ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmptyString('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+        // One message per field: the first rule that fails. It also keeps a later
+        // rule from ever receiving a value an earlier one rejected, e.g. an array.
+        $validator->setStopOnFailure();
 
         $validator
-            ->scalar('password')
-            ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->scalar('name', __('Please enter your name.'))
+            ->requirePresence('name', 'create', __('Please enter your name.'))
+            ->notEmptyString('name', __('Please enter your name.'))
+            ->minLength(
+                'name',
+                self::NAME_MIN_LENGTH,
+                __('Name must be at least {0} characters long.', self::NAME_MIN_LENGTH),
+            )
+            ->maxLength(
+                'name',
+                self::NAME_MAX_LENGTH,
+                __('Name can be at most {0} characters long.', self::NAME_MAX_LENGTH),
+            );
 
         $validator
-            ->scalar('confirm_password')
-            ->requirePresence('confirm_password', 'create')
-            ->notEmptyString('confirm_password');
+            ->scalar('email', __('Please enter a valid email address.'))
+            ->requirePresence('email', 'create', __('Please enter your email address.'))
+            ->notEmptyString('email', __('Please enter your email address.'))
+            ->maxLength(
+                'email',
+                self::EMAIL_MAX_LENGTH,
+                __('Email address can be at most {0} characters long.', self::EMAIL_MAX_LENGTH),
+            )
+            ->email('email', false, __('Please enter a valid email address.'))
+            ->add('email', 'unique', [
+                'rule' => 'validateUnique',
+                'provider' => 'table',
+                'message' => __('An account with this email address already exists.'),
+            ]);
+
+        $validator
+            ->scalar('password', __('Please enter a password.'))
+            ->requirePresence('password', 'create', __('Please enter a password.'))
+            ->notEmptyString('password', __('Please enter a password.'))
+            ->add('password', 'strength', [
+                'rule' => fn(string $value): string|bool => PasswordValidator::strengthError($value) ?? true,
+            ]);
+
+        $validator
+            ->scalar('confirm_password', __('Please confirm your password.'))
+            ->requirePresence('confirm_password', 'create', __('Please confirm your password.'))
+            ->notEmptyString('confirm_password', __('Please confirm your password.'))
+            ->sameAs('confirm_password', 'password', __('Passwords do not match.'));
 
         $validator
             ->integer('avatar_id')
@@ -115,6 +153,26 @@ class UsersTable extends Table
         ]);
 
         return $rules;
+    }
+
+    /**
+     * Normalizes the name and email before validation: trims both ends and collapses
+     * repeated whitespace inside the name
+     *
+     * @param \Cake\Event\EventInterface $event
+     * @param \ArrayObject $data
+     * @param \ArrayObject $options
+     * @return void
+     */
+    public function beforeMarshal(EventInterface $event, ArrayObject $data, ArrayObject $options): void
+    {
+        if (isset($data['name']) && is_string($data['name'])) {
+            $data['name'] = trim((string)preg_replace('/\s+/u', ' ', $data['name']));
+        }
+
+        if (isset($data['email']) && is_string($data['email'])) {
+            $data['email'] = trim($data['email']);
+        }
     }
 
     /**
