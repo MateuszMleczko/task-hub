@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Authenticator\VerifiedFormAuthenticator;
 use App\Enum\TaskStatusEnum;
 use App\Model\Entity\User;
 use App\Utility\PasswordValidator;
@@ -19,6 +20,7 @@ use Cake\Mailer\MailerAwareTrait;
  * @property \App\Model\Table\UsersTable $Users
  * @property \App\Model\Table\RestorePasswordTokensTable $RestorePasswordTokens
  * @property \App\Model\Table\TasksTable $Tasks
+ * @property \App\Model\Table\EmailVerificationTokensTable $EmailVerificationTokens
  */
 class UsersController extends AppController
 {
@@ -26,10 +28,13 @@ class UsersController extends AppController
 
     private const RESET_TOKEN_LIFETIME = 60;
     private const RESET_PASSWORD_LIMIT = 5;
+    private const EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS = 24;
+    private const EMAIL_VERIFICATION_RESEND_LIMIT = 5;
 
     private $Users;
     private $RestorePasswordTokens;
     private $Tasks;
+    private $EmailVerificationTokens;
     /**
      * Initialize controller
      *
@@ -39,10 +44,11 @@ class UsersController extends AppController
     {
         parent::initialize();
 
-        $this->Authentication->allowUnauthenticated(['login', 'register', 'forgotPassword', 'resetPassword']);
+        $this->Authentication->allowUnauthenticated(['login', 'register', 'forgotPassword', 'resetPassword', 'confirmEmail', 'resendConfirmation']);
         $this->Users = $this->fetchTable('Users');
         $this->RestorePasswordTokens = $this->fetchTable('RestorePasswordTokens');
         $this->Tasks = $this->fetchTable('Tasks');
+        $this->EmailVerificationTokens = $this->fetchTable('EmailVerificationTokens');
     }
 
     /**
@@ -61,11 +67,20 @@ class UsersController extends AppController
             return $this->redirect($redirect);
         }
 
+        if ($result->getStatus() === VerifiedFormAuthenticator::FAILURE_EMAIL_NOT_VERIFIED) {
+            $this->Flash->error(__('Please confirm your email address before logging in.'));
+
+            return;
+        }
+
         if ($this->request->is('post')) {
             $this->Flash->error(__('Invalid email or password'));
         }
     }
 
+    /**
+     * @throws RandomException
+     */
     public function register()
     {
         $this->request->allowMethod(['get', 'post']);
@@ -80,7 +95,11 @@ class UsersController extends AppController
             $user->privacy_policy_accepted_at = new DateTime();
 
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('Registration successful. You can now log in.'));
+                if ($this->sendEmailVerification($user)) {
+                    $this->Flash->success(__('Registration successful. Confirm your email address to log in.'));
+                } else {
+                    $this->Flash->error(__('Failed to send email address confirm message. Please try again later.'));
+                }
 
                 return $this->redirect(['action' => 'login']);
             } else {
@@ -91,6 +110,79 @@ class UsersController extends AppController
         $selectedAvatarId = $user->avatar_id ?? $avatars->first()?->id;
 
         $this->set(compact('user', 'avatars', 'selectedAvatarId'));
+    }
+
+    public function confirmEmail(string $token): ?Response
+    {
+        if (empty($token) || strlen($token) < 64) {
+            return $this->redirect(['action' => 'login']);
+        }
+
+        $emailVerificationToken = $this->EmailVerificationTokens
+            ->find()
+            ->where(['token' => TokensGenerator::hash($token)])
+            ->first();
+
+        if (!$emailVerificationToken || $emailVerificationToken->expires_at < new DateTime()) {
+            $this->Flash->error(__('Invalid or expired email verification token.'));
+            return $this->redirect(['action' => 'login']);
+        }
+
+        $user = $this->Users->get($emailVerificationToken->user_id);
+        $user->email_verified_at = new DateTime();
+
+        if ($this->Users->save($user)) {
+            $this->EmailVerificationTokens->delete($emailVerificationToken);
+            $this->Flash->success(__('Your email address has been confirmed. You can now log in.'));
+        } else {
+            $this->Flash->error(__('Failed to confirm email address. Please try again.'));
+        }
+
+        return $this->redirect(['action' => 'login']);
+    }
+
+    /**
+     * Sends a new confirmation link to an account that has not been confirmed yet.
+     *
+     * The flash message is the same whether the address has an account or not,
+     * so the form cannot be used to find out who is registered.
+     *
+     * @throws RandomException
+     */
+    public function resendConfirmation(): ?Response
+    {
+        $this->request->allowMethod(['get', 'post']);
+
+        if (!$this->request->is('post')) {
+            return null;
+        }
+
+        $user = $this->Users
+            ->find()
+            ->where([
+                'email' => (string)$this->request->getData('email'),
+                'email_verified_at IS' => null,
+            ])
+            ->first();
+
+        if ($user) {
+            $existingToken = $this->EmailVerificationTokens
+                ->find()
+                ->where(['user_id' => $user->id])
+                ->first();
+
+            $cooldownEnds = DateTime::now()
+                ->addHours(self::EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS)
+                ->subMinutes(self::EMAIL_VERIFICATION_RESEND_LIMIT);
+
+            if (!$existingToken || $existingToken->expires_at <= $cooldownEnds) {
+                $this->sendEmailVerification($user);
+            }
+        }
+
+        $this->Flash->success(__('If an unconfirmed account with this email exists, a new confirmation link has been sent.'));
+
+        return $this->redirect(['action' => 'login']);
     }
 
     public function logout()
@@ -303,6 +395,40 @@ class UsersController extends AppController
         $this->Flash->error(__('Failed to delete account. Please try again.'));
 
         return $this->redirect(['action' => 'profile']);
+    }
+
+    /**
+     * Replaces the user's confirmation token with a new one and emails the link.
+     *
+     * @param \App\Model\Entity\User $user User whose address is being confirmed.
+     * @return bool False when the token could not be saved or the email could not be sent.
+     * @throws RandomException
+     */
+    private function sendEmailVerification(User $user): bool
+    {
+        $token = TokensGenerator::generateRandomString();
+
+        $this->EmailVerificationTokens->deleteAll(['user_id' => $user->id]);
+        $emailVerificationToken = $this->EmailVerificationTokens->newEmptyEntity();
+        $emailVerificationToken->user_id = $user->id;
+        $emailVerificationToken->token = TokensGenerator::hash($token);
+        $emailVerificationToken->expires_at = DateTime::now()->addHours(self::EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS);
+
+        if (!$this->EmailVerificationTokens->save($emailVerificationToken)) {
+            return false;
+        }
+
+        try {
+            $this->getMailer('Default')->send('confirmEmail', [
+                $user->email,
+                Router::url(['controller' => 'Users', 'action' => 'confirmEmail', $token], true),
+                self::EMAIL_VERIFICATION_TOKEN_LIFETIME_HOURS,
+            ]);
+        } catch (\Exception $e) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
