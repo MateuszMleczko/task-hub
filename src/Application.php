@@ -112,6 +112,11 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
             ->add(new AuthenticationMiddleware($this))
 
+            // Needs the identity, so it comes after authentication. The current
+            // password is only checked in the controller, so a refused attempt
+            // still never reaches the password hashing.
+            ->add($this->accountRateLimit())
+
             // Cross Site Request Forgery (CSRF) Protection Middleware
             // https://book.cakephp.org/5/en/security/csrf.html#cross-site-request-forgery-csrf-middleware
             ->add(new CsrfProtectionMiddleware([
@@ -131,7 +136,11 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     {
         return new RateLimitMiddleware([
             'headers' => false,
-            'skipCheck' => fn(ServerRequest $request): bool => $this->throttledAction($request) === null,
+            'skipCheck' => fn(ServerRequest $request): bool => !in_array(
+                $this->throttledAction($request),
+                ['login', 'forgotPassword', 'resendConfirmation'],
+                true,
+            ),
             'limiterResolver' => fn(ServerRequest $request): ?string => $this->throttledAction($request),
             /*
              * The cache key is a hash of the identifier alone, so the action name has
@@ -157,9 +166,14 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     }
 
     /**
-     * Throttle on the address typed into the forms that send an email, so nobody
-     * can flood somebody else's inbox by sending the request from many addresses.
-     * Every form keeps its own counter per address.
+     * Throttle on the address typed into the form, so spreading the requests over
+     * many IP addresses does not help. Every form keeps its own counter per address.
+     *
+     * - `login` slows down guessing one account's password from many addresses.
+     *   Looser than the per IP limit, because anybody can type a wrong password
+     *   into somebody else's account and would otherwise lock its owner out.
+     * - `forgotPassword` and `resendConfirmation` stop anybody from flooding
+     *   somebody else's inbox.
      *
      * @return \Cake\Http\Middleware\RateLimitMiddleware
      */
@@ -167,18 +181,42 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     {
         return new RateLimitMiddleware([
             'headers' => false,
-            'limit' => 3,
-            'window' => 3600,
             'skipCheck' => fn(ServerRequest $request): bool => !in_array(
                 $this->throttledAction($request),
-                ['forgotPassword', 'resendConfirmation'],
+                ['login', 'forgotPassword', 'resendConfirmation'],
                 true,
             ) || !$request->getData('email'),
+            'limiterResolver' => fn(ServerRequest $request): ?string => $this->throttledAction($request),
             'identifierCallback' => fn(ServerRequest $request): string => sprintf(
                 '%s-email:%s',
                 $this->throttledAction($request),
                 mb_strtolower(trim((string)$request->getData('email'))),
             ),
+            'limiters' => [
+                'login' => ['limit' => 20, 'window' => 900],
+                'forgotPassword' => ['limit' => 3, 'window' => 3600],
+                'resendConfirmation' => ['limit' => 3, 'window' => 3600],
+            ],
+            'message' => 'Too many attempts. Please try again later.',
+        ]);
+    }
+
+    /**
+     * Throttle on the logged in user for the change password form, so a hijacked
+     * session cannot be used to guess the current password.
+     *
+     * @return \Cake\Http\Middleware\RateLimitMiddleware
+     */
+    private function accountRateLimit(): RateLimitMiddleware
+    {
+        return new RateLimitMiddleware([
+            'headers' => false,
+            'limit' => 5,
+            'window' => 900,
+            'skipCheck' => fn(ServerRequest $request): bool => $this->throttledAction($request) !== 'changePassword'
+                || $request->getAttribute('identity') === null,
+            'identifierCallback' => fn(ServerRequest $request): string => 'change-password-user:'
+                . $request->getAttribute('identity')->getIdentifier(),
             'message' => 'Too many attempts. Please try again later.',
         ]);
     }
@@ -203,7 +241,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
         $action = $params['action'] ?? null;
 
-        return in_array($action, ['login', 'forgotPassword', 'resendConfirmation'], true) ? $action : null;
+        return in_array($action, ['login', 'forgotPassword', 'resendConfirmation', 'changePassword'], true)
+            ? $action
+            : null;
     }
 
     /**
