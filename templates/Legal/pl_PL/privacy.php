@@ -6,7 +6,7 @@ $this->Html->css('legalStyle', ['block' => true]);
 <article class="legal">
     <header class="legal__header">
         <h1 class="legal__title">Polityka prywatności</h1>
-        <p class="legal__meta">Obowiązuje od 24 września 2026 r.</p>
+        <p class="legal__meta">Obowiązuje od 28 września 2026 r.</p>
     </header>
 
     <p class="legal__lead">
@@ -33,14 +33,19 @@ $this->Html->css('legalStyle', ['block' => true]);
         <ul class="legal__list">
             <li class="legal__item"><strong>Dane konta:</strong> imię, adres e-mail, hasło (przechowywane
                 wyłącznie w postaci skrótu kryptograficznego — nikt, również Administrator, nie zna Twojego
-                hasła), wybrany awatar oraz data utworzenia konta i akceptacji polityki prywatności.</li>
+                hasła), wybrany awatar oraz data utworzenia konta, potwierdzenia adresu e-mail i akceptacji polityki
+                prywatności.</li>
             <li class="legal__item"><strong>Treści, które dodajesz:</strong> zadania wraz z tytułem, opisem,
                 statusem, priorytetem i terminem.</li>
+            <li class="legal__item"><strong>Dane potwierdzenia adresu e-mail:</strong> jednorazowy token
+                wysyłany na Twój adres e-mail po rejestracji oraz gdy poprosisz o ponowne wysłanie linku
+                potwierdzającego.</li>
             <li class="legal__item"><strong>Dane resetu hasła:</strong> jednorazowy token wysyłany na Twój
                 adres e-mail, gdy skorzystasz z funkcji „Nie pamiętam hasła”.</li>
             <li class="legal__item"><strong>Dane techniczne:</strong> adres IP i informacje o żądaniu
                 (m.in. data, adres podstrony, przeglądarka) zapisywane w logach serwera i aplikacji oraz tymczasowe liczniki
-                prób logowania i resetu hasła, służące ochronie przed nadużyciami.</li>
+                prób logowania, resetu hasła, ponownego wysłania linku potwierdzającego i zmiany hasła, służące
+                ochronie przed nadużyciami.</li>
         </ul>
         <p class="legal__text">
             Nie przetwarzamy szczególnych kategorii danych. Prosimy, nie umieszczaj ich w treści zadań.
@@ -51,7 +56,7 @@ $this->Html->css('legalStyle', ['block' => true]);
         <h2 class="legal__heading">3. Cele i podstawy prawne przetwarzania</h2>
         <ul class="legal__list">
             <li class="legal__item"><strong>Założenie i prowadzenie konta oraz świadczenie usługi</strong>
-                (zarządzanie zadaniami, logowanie, reset hasła) — art. 6 ust. 1 lit. b RODO (wykonanie umowy
+                (potwierdzenie adresu e-mail, zarządzanie zadaniami, logowanie, reset hasła) — art. 6 ust. 1 lit. b RODO (wykonanie umowy
                 o świadczenie usług drogą elektroniczną).</li>
             <li class="legal__item"><strong>Zapewnienie bezpieczeństwa serwisu</strong>, w tym ochrona przed
                 próbami odgadnięcia hasła i nadużyciami — art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes
@@ -99,9 +104,16 @@ $this->Html->css('legalStyle', ['block' => true]);
             <li class="legal__item"><strong>Dane konta i zadania</strong> — do czasu usunięcia konta.
                 Po usunięciu konta dane są kasowane z bazy, a z kopii zapasowych znikają w ramach ich
                 rotacji, nie później niż po 30 dniach.</li>
+            <li class="legal__item"><strong>Niepotwierdzone konta</strong> — jeśli adres e-mail nie zostanie
+                potwierdzony, konto wraz ze wszystkimi danymi jest usuwane automatycznie w ciągu doby po upływie
+                7 dni od rejestracji.</li>
+            <li class="legal__item"><strong>Token potwierdzenia adresu e-mail</strong> — jest ważny przez
+                24 godziny. Usuwamy go po wykorzystaniu lub po wysłaniu nowego linku, a niewykorzystany — razem
+                z niepotwierdzonym kontem.</li>
             <li class="legal__item"><strong>Token resetu hasła</strong> — jest ważny przez 60 minut. Usuwamy go po wykorzystaniu,
                 a niewykorzystany — automatycznie w ciągu godziny od wygaśnięcia.</li>
-            <li class="legal__item"><strong>Liczniki prób logowania i resetu hasła</strong> — maksymalnie
+            <li class="legal__item"><strong>Liczniki prób logowania, resetu hasła, ponownego wysłania linku
+                potwierdzającego i zmiany hasła</strong> — maksymalnie
                 1 godzinę.</li>
             <li class="legal__item"><strong>Logi serwera i aplikacji</strong> — nie dłużej niż 30 dni, chyba że są
                 potrzebne do wyjaśnienia incydentu bezpieczeństwa.</li>
@@ -157,7 +169,8 @@ $this->Html->css('legalStyle', ['block' => true]);
         <h2 class="legal__heading">9. Bezpieczeństwo</h2>
         <p class="legal__text">
             Połączenie z serwisem jest szyfrowane (HTTPS), hasła są przechowywane wyłącznie w postaci skrótu
-            kryptograficznego, a liczba prób logowania i resetu hasła jest ograniczona. Dostęp do bazy danych ma wyłącznie Administrator
+            kryptograficznego, a liczba prób logowania, resetu hasła,
+            ponownego wysłania linku potwierdzającego i zmiany hasła jest ograniczona. Dostęp do bazy danych ma wyłącznie Administrator
             oraz, w zakresie niezbędnym do utrzymania serwerów, dostawca hostingu.
         </p>
     </section>
