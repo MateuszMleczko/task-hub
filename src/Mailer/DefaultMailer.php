@@ -31,6 +31,21 @@ class DefaultMailer extends Mailer
             ->setTemplate('forgot_password');
     }
 
+    public function confirmEmail(string $email, string $url, int $hours): void
+    {
+        $this
+            ->setTo(trim($email))
+            ->setFrom($this->fromEmail)
+            ->setSubject($this->subject(__d('email', 'Confirm your email')))
+            ->setEmailFormat('html')
+            ->setViewVars([
+                'url' => $url,
+                'hours' => $hours,
+            ])
+            ->viewBuilder()
+            ->setTemplate('confirm_email');
+    }
+
     private function subject(string $title): string
     {
         return 'TaskHub' . ' - ' . $title;

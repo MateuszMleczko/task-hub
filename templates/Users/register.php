@@ -19,6 +19,7 @@
                     'id' => 'name',
                     'class' => 'auth__input',
                     'autocomplete' => 'name',
+                    'maxlength' => $this->Form->context()->getMaxLength('name'),
                     'required' => true,
                     'autofocus' => true,
                 ]) ?>

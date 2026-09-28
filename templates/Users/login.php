@@ -48,6 +48,15 @@
             <button type="submit" class="auth__submit">
                 <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i><?= __('Login') ?>
             </button>
+
+            <p class="auth__help">
+                <?= __("Didn't receive the confirmation email?") ?>
+                <?= $this->Html->link(
+                    __('Send it again'),
+                    ['action' => 'resendConfirmation'],
+                    ['class' => 'auth__link auth__link--inline'],
+                ) ?>
+            </p>
         <?= $this->Form->end() ?>
 
         <div class="auth__footer">

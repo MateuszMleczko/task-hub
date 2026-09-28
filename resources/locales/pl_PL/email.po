@@ -18,3 +18,15 @@ msgstr "Jeśli nie prosiłeś o zresetowanie hasła, zignoruj tę wiadomość."
 
 msgid "Password reset"
 msgstr "Resetowanie hasła"
+
+msgid "Confirm your email"
+msgstr "Potwierdź swój adres e-mail"
+
+msgid "Thank you for registering at TaskHub. Click the link below to confirm your email address and activate your account:"
+msgstr "Dziękujemy za rejestrację w TaskHub. Kliknij poniższy link, aby potwierdzić swój adres e-mail i aktywować konto:"
+
+msgid "This link is valid for {0} hours"
+msgstr "Ten link jest ważny przez {0} godz."
+
+msgid "If you did not create a TaskHub account, please ignore this message."
+msgstr "Jeśli nie zakładałeś konta w TaskHub, zignoruj tę wiadomość."

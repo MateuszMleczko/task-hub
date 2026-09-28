@@ -64,8 +64,8 @@ msgstr "Wystąpił błąd wewnętrzny."
 msgid "Registration failed. Please try again."
 msgstr "Rejestracja nie powiodła się. Spróbuj ponownie."
 
-msgid "Registration successful. You can now log in."
-msgstr "Rejestracja zakończona sukcesem. Teraz możesz się zalogować."
+msgid "Registration successful. Confirm your email address to log in."
+msgstr "Rejestracja zakończona sukcesem. Potwierdź swój adres e-mail, aby się zalogować."
 
 msgid "Password and confirm password fields cannot be empty."
 msgstr "Pola hasło i potwierdź hasło nie mogą być puste."
@@ -376,3 +376,62 @@ msgstr "Twoje konto zostało pomyślnie usunięte."
 msgid "Failed to delete account. Please try again."
 msgstr "Nie udało się usunąć konta. Spróbuj ponownie."
 
+msgid "Please enter your name."
+msgstr "Podaj swoje imię."
+
+msgid "Name must be at least {0} characters long."
+msgstr "Imię musi mieć co najmniej {0} znaki."
+
+msgid "Name can be at most {0} characters long."
+msgstr "Imię może mieć maksymalnie {0} znaków."
+
+msgid "Please enter your email address."
+msgstr "Podaj adres e-mail."
+
+msgid "Email address can be at most {0} characters long."
+msgstr "Adres e-mail może mieć maksymalnie {0} znaków."
+
+msgid "Please enter a valid email address."
+msgstr "Podaj poprawny adres e-mail."
+
+msgid "An account with this email address already exists."
+msgstr "Konto z tym adresem e-mail już istnieje."
+
+msgid "Please enter a password."
+msgstr "Podaj hasło."
+
+msgid "Please confirm your password."
+msgstr "Powtórz hasło."
+
+msgid "Failed to send email address confirm message. Please try again later."
+msgstr "Nie udało się wysłać wiadomości potwierdzającej adres e-mail. Spróbuj ponownie później."
+
+msgid "Your email address has been confirmed. You can now log in."
+msgstr "Twój adres e-mail został potwierdzony. Teraz możesz się zalogować."
+
+msgid "Invalid or expired email verification token."
+msgstr "Nieprawidłowy lub wygasły token weryfikacji e-mail."
+
+msgid "Please confirm your email address before logging in."
+msgstr "Potwierdź swój adres e-mail przed zalogowaniem się."
+
+msgid "Failed to confirm email address. Please try again."
+msgstr "Nie udało się potwierdzić adresu e-mail. Spróbuj ponownie."
+
+msgid "If an unconfirmed account with this email exists, a new confirmation link has been sent."
+msgstr "Jeśli istnieje niepotwierdzone konto z tym adresem e-mail, wysłaliśmy nowy link potwierdzający."
+
+msgid "Confirm your email"
+msgstr "Potwierdź swój adres e-mail"
+
+msgid "Enter your email and we will send you a new link to confirm your account."
+msgstr "Podaj swój adres e-mail, a wyślemy Ci nowy link do potwierdzenia konta."
+
+msgid "Send confirmation link"
+msgstr "Wyślij link potwierdzający"
+
+msgid "Didn't receive the confirmation email?"
+msgstr "Nie dotarł e-mail potwierdzający?"
+
+msgid "Send it again"
+msgstr "Wyślij ponownie"
