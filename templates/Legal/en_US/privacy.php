@@ -6,7 +6,7 @@ $this->Html->css('legalStyle', ['block' => true]);
 <article class="legal">
     <header class="legal__header">
         <h1 class="legal__title">Privacy policy</h1>
-        <p class="legal__meta">Effective from 24 September 2026</p>
+        <p class="legal__meta">Effective from 28 September 2026</p>
     </header>
 
     <p class="legal__lead">
@@ -32,14 +32,18 @@ $this->Html->css('legalStyle', ['block' => true]);
         <ul class="legal__list">
             <li class="legal__item"><strong>Account data:</strong> name, email address, password (stored only
                 as a cryptographic hash — nobody, including the Controller, knows your password), chosen avatar,
-                and the dates the account was created and the privacy policy was accepted.</li>
+                and the dates the account was created, the email address was confirmed and the privacy policy was
+                accepted.</li>
             <li class="legal__item"><strong>Content you add:</strong> tasks with their title, description,
                 status, priority and deadline.</li>
+            <li class="legal__item"><strong>Email confirmation data:</strong> a single-use token sent to your
+                email address after you register and whenever you ask for the confirmation link to be sent
+                again.</li>
             <li class="legal__item"><strong>Password reset data:</strong> a single-use token sent to your email
                 address when you use the “Forgot password” feature.</li>
             <li class="legal__item"><strong>Technical data:</strong> IP address and request details (such as
-                date, page address and browser) recorded in server and application logs, and temporary counters of login and
-                password reset attempts used to prevent abuse.</li>
+                date, page address and browser) recorded in server and application logs, and temporary counters of login,
+                password reset, confirmation link resend and password change attempts used to prevent abuse.</li>
         </ul>
         <p class="legal__text">
             We do not process special categories of data. Please do not put them in your tasks.
@@ -50,7 +54,7 @@ $this->Html->css('legalStyle', ['block' => true]);
         <h2 class="legal__heading">3. Purposes and legal bases</h2>
         <ul class="legal__list">
             <li class="legal__item"><strong>Creating and maintaining your account and providing the
-                service</strong> (task management, signing in, password reset) — Article 6(1)(b) GDPR
+                service</strong> (email address confirmation, task management, signing in, password reset) — Article 6(1)(b) GDPR
                 (performance of a contract for electronically supplied services).</li>
             <li class="legal__item"><strong>Keeping the service secure</strong>, including protection against
                 password guessing and abuse — Article 6(1)(f) GDPR (the Controller’s legitimate interest).</li>
@@ -95,9 +99,16 @@ $this->Html->css('legalStyle', ['block' => true]);
             <li class="legal__item"><strong>Account data and tasks</strong> — until the account is deleted.
                 After deletion the data is removed from the database and disappears from backups as they rotate,
                 no later than after 30 days.</li>
+            <li class="legal__item"><strong>Unconfirmed accounts</strong> — if the email address is not
+                confirmed, the account and all its data are deleted automatically within a day after 7 days from
+                registration.</li>
+            <li class="legal__item"><strong>Email confirmation token</strong> — valid for 24 hours. Removed once
+                used or when a new link is sent, and an unused one is deleted together with the unconfirmed
+                account.</li>
             <li class="legal__item"><strong>Password reset token</strong> — valid for 60 minutes. Removed once used, and an unused
                 one is deleted automatically within an hour of expiring.</li>
-            <li class="legal__item"><strong>Login and password reset attempt counters</strong> — up to
+            <li class="legal__item"><strong>Login, password reset, confirmation link resend and password change
+                attempt counters</strong> — up to
                 1 hour.</li>
             <li class="legal__item"><strong>Server and application logs</strong> — no longer than 30 days, unless needed to
                 investigate a security incident.</li>
@@ -152,7 +163,8 @@ $this->Html->css('legalStyle', ['block' => true]);
         <h2 class="legal__heading">9. Security</h2>
         <p class="legal__text">
             Connections to the service are encrypted (HTTPS), passwords are stored only as cryptographic hashes,
-            and the number of login and password reset attempts is limited. Only the Controller and, to the extent needed to
+            and the number of login, password reset,
+            confirmation link resend and password change attempts is limited. Only the Controller and, to the extent needed to
             maintain the servers, the hosting provider have access to the database.
         </p>
     </section>
