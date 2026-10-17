@@ -12,6 +12,8 @@
             <p class="auth__subtitle"><?= __('Log in to get back to your tasks.') ?></p>
         </div>
 
+        <?= $this->element('demo_notice') ?>
+
         <?= $this->Form->create(null, [
             'url' => ['controller' => 'Users', 'action' => 'login'],
             'class' => 'auth__form',
