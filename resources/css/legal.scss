@@ -35,6 +35,26 @@
         color: $color-text;
     }
 
+    &__notice {
+        margin: 0 0 2rem;
+        padding: 1rem 1.25rem;
+        border: 1px solid rgba($color-teal-light, 0.25);
+        border-left: 3px solid $color-teal-light;
+        border-radius: $border-radius;
+        background-color: rgba($color-teal, 0.12);
+
+        .legal__text:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__notice-title {
+        margin: 0 0 0.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $color-text;
+    }
+
     &__section {
         margin-bottom: 2rem;
     }

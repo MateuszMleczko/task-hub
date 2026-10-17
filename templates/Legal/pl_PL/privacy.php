@@ -15,6 +15,19 @@ $this->Html->css('legalStyle', ['block' => true]);
         Rozporządzenia Parlamentu Europejskiego i Rady (UE) 2016/679 (RODO).
     </p>
 
+    <aside class="legal__notice">
+        <h2 class="legal__notice-title">Projekt demonstracyjny</h2>
+        <p class="legal__text">
+            TaskHub to projekt portfolio, który ma pokazywać umiejętności autora. Możesz normalnie z niego
+            korzystać, ale nie jest to usługa komercyjna — Administrator nie gwarantuje ciągłości działania
+            serwisu, dlatego nie przechowuj w nim ważnych ani poufnych informacji.
+        </p>
+        <p class="legal__text">
+            Kod źródłowy serwisu jest otwarty (licencja MIT) i dostępny na
+            <a class="legal__link" href="https://github.com/MateuszMleczko" target="_blank" rel="noopener">GitHubie autora</a>.
+        </p>
+    </aside>
+
     <section class="legal__section">
         <h2 class="legal__heading">1. Administrator danych</h2>
         <p class="legal__text">

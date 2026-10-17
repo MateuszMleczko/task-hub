@@ -15,6 +15,19 @@ $this->Html->css('legalStyle', ['block' => true]);
         European Parliament and of the Council (GDPR).
     </p>
 
+    <aside class="legal__notice">
+        <h2 class="legal__notice-title">Demo project</h2>
+        <p class="legal__text">
+            TaskHub is a portfolio project meant to showcase the author's skills. You are welcome to use it,
+            but it is not a commercial service — the Controller does not guarantee that the service will remain
+            available, so please do not keep important or confidential information in it.
+        </p>
+        <p class="legal__text">
+            The source code is open source (MIT License) and available on
+            <a class="legal__link" href="https://github.com/MateuszMleczko" target="_blank" rel="noopener">the author's GitHub</a>.
+        </p>
+    </aside>
+
     <section class="legal__section">
         <h2 class="legal__heading">1. Data controller</h2>
         <p class="legal__text">

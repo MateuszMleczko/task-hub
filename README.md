@@ -3,6 +3,11 @@
 A simple kanban task board with user accounts, avatars and password reset via e-mail.
 Backend: CakePHP 5. Frontend: custom SCSS on top of Bootstrap 5, built with Vite.
 
+> **Portfolio demo.** TaskHub is a showcase project linked from my portfolio and CV. The live instance is
+> fully usable, but it is not a commercial service - there is no uptime guarantee, so don't keep important
+> data in it. The code is open source under the [MIT License](LICENSE) - more of my work on
+> [GitHub](https://github.com/MateuszMleczko).
+
 ## Requirements
 
 - PHP >= 8.2 with `intl`, `mbstring`, `pdo_mysql`

@@ -60,6 +60,10 @@
     <div class="container text-center">
         <small style="color: rgba(253, 235, 158, 0.4);">
             TaskHub &copy; <?= date('Y') ?> &middot;
+            <?= __('Portfolio demo project') ?> &middot;
+            <a href="https://github.com/MateuszMleczko" target="_blank" rel="noopener" style="color: inherit;">
+                <i class="bi bi-github me-1" aria-hidden="true"></i><?= __('Open source on GitHub') ?>
+            </a> &middot;
             <?= $this->Html->link(__('Privacy policy'), ['controller' => 'Legal', 'action' => 'privacy'], [
                 'style' => 'color: inherit;',
             ]) ?>
