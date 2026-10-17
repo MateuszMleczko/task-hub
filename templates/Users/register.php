@@ -12,6 +12,8 @@
             <p class="auth__subtitle"><?= __('A few details and you are ready to plan.') ?></p>
         </div>
 
+        <?= $this->element('demo_notice') ?>
+
         <?= $this->Form->create($user, ['class' => 'auth__form']) ?>
             <div class="auth__field">
                 <label class="auth__label" for="name"><?= __('Name') ?></label>

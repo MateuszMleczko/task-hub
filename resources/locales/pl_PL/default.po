@@ -435,3 +435,15 @@ msgstr "Nie dotarł e-mail potwierdzający?"
 
 msgid "Send it again"
 msgstr "Wyślij ponownie"
+
+msgid "Portfolio demo project"
+msgstr "Projekt demonstracyjny do portfolio"
+
+msgid "Open source on GitHub"
+msgstr "Kod open source na GitHubie"
+
+msgid "TaskHub is a portfolio demo project. Feel free to use it, but it is not a commercial service - please do not keep important data here."
+msgstr "TaskHub to demonstracyjny projekt do portfolio. Możesz z niego normalnie korzystać, ale nie jest to usługa komercyjna — nie przechowuj tu ważnych danych."
+
+msgid "The source code is open source:"
+msgstr "Kod źródłowy jest otwarty (open source):"
