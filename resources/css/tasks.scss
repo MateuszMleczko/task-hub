@@ -1,19 +1,5 @@
-@use 'sass:color';
 @use 'sass:map';
 @use 'variables' as *;
-
-$status-accents: (
-    'todo': $color-teal-light,
-    'progress': $color-yellow,
-    'blocked': $color-coral,
-    'done': color.mix($color-teal-light, $color-teal, 35%),
-);
-
-$priority-accents: (
-    'low': $color-text-muted,
-    'medium': $color-yellow,
-    'high': $color-coral,
-);
 
 .tasks {
     --task-accent: #{$color-teal-light};

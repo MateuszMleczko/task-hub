@@ -41,6 +41,30 @@
         }
     }
 
+    .navbar-nav .nav-link--cta {
+        padding: 0.4375rem 1rem;
+        border: 1px solid rgba($color-teal-light, 0.5);
+        border-radius: $border-radius;
+        color: $color-teal-light;
+        text-align: center;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+        &:hover,
+        &:focus-visible {
+            border-color: $color-teal-light;
+            background-color: $color-teal-light;
+            color: $color-dark;
+        }
+
+        @media (max-width: 61.98rem) {
+            margin-top: 0.5rem;
+        }
+
+        @media (min-width: 62rem) {
+            margin-left: 0.5rem;
+        }
+    }
+
     // User avatar
     .nav-link-avatar {
         padding-top: 0;
