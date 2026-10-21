@@ -30,7 +30,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
                 <?php if ($this->request->getAttribute('identity')): ?>
                     <li class="nav-item d-none d-lg-block">
                         <a class="nav-link nav-link-avatar" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>">
@@ -41,6 +41,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'logout']) ?>">
                             <i class="bi bi-box-arrow-right me-1"></i><?= __('Logout') ?>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'login']) ?>">
+                            <i class="bi bi-box-arrow-in-right me-1"></i><?= __('Login') ?>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-link--cta" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'register']) ?>">
+                            <?= __('Sign up') ?>
                         </a>
                     </li>
                 <?php endif; ?>
@@ -56,18 +68,18 @@
     </div>
 </main>
 
-<footer class="py-3 mt-auto">
-    <div class="container text-center">
-        <small style="color: rgba(253, 235, 158, 0.4);">
+<footer class="site-footer">
+    <div class="container">
+        <p class="site-footer__text">
             TaskHub &copy; <?= date('Y') ?> &middot;
             <?= __('Portfolio demo project') ?> &middot;
-            <a href="https://github.com/MateuszMleczko" target="_blank" rel="noopener" style="color: inherit;">
+            <a class="site-footer__link" href="https://github.com/MateuszMleczko" target="_blank" rel="noopener">
                 <i class="bi bi-github me-1" aria-hidden="true"></i><?= __('Open source on GitHub') ?>
             </a> &middot;
             <?= $this->Html->link(__('Privacy policy'), ['controller' => 'Legal', 'action' => 'privacy'], [
-                'style' => 'color: inherit;',
+                'class' => 'site-footer__link',
             ]) ?>
-        </small>
+        </p>
     </div>
 </footer>
 

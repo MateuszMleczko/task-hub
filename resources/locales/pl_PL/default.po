@@ -447,3 +447,138 @@ msgstr "TaskHub to demonstracyjny projekt do portfolio. Możesz z niego normalni
 
 msgid "The source code is open source:"
 msgstr "Kod źródłowy jest otwarty (open source):"
+
+msgid "Your tasks on one clear board"
+msgstr "Twoje zadania na jednej przejrzystej tablicy"
+
+msgid "TaskHub is a simple kanban board for your own tasks: four columns, priorities, deadlines and drag and drop."
+msgstr "TaskHub to prosta tablica kanban do własnych zadań: cztery kolumny, priorytety, terminy i przeciąganie kart."
+
+msgid "Kanban task board"
+msgstr "Tablica zadań kanban"
+
+msgid "Your tasks."
+msgstr "Twoje zadania."
+
+msgid "One clear board."
+msgstr "Jedna przejrzysta tablica."
+
+msgid "TaskHub keeps all your work in four columns, from to do to done. Add a task, set its priority and deadline, then drag it along as the work moves forward."
+msgstr "TaskHub układa całą Twoją pracę w czterech kolumnach, od zaplanowanej do zrobionej. Dodaj zadanie, ustaw priorytet i termin, a potem przesuwaj kartę dalej razem z postępem pracy."
+
+msgid "Create an account"
+msgstr "Załóż konto"
+
+msgid "Open source, MIT License"
+msgstr "Open source, licencja MIT"
+
+msgid "Polish and English"
+msgstr "Po polsku i po angielsku"
+
+msgid "No ads or trackers"
+msgstr "Bez reklam i śledzenia"
+
+msgid "Features"
+msgstr "Funkcje"
+
+msgid "Simple on purpose"
+msgstr "Prosty z założenia"
+
+msgid "No sprints, no story points, no setup. Just what you need to keep track of your own work."
+msgstr "Bez sprintów, story pointów i konfiguracji. Tylko to, czego potrzebujesz, żeby panować nad własną pracą."
+
+msgid "Drag and drop board"
+msgstr "Tablica z przeciąganiem kart"
+
+msgid "Four columns: to do, in progress, blocked and done. Drop a card into another column and its status is saved right away."
+msgstr "Cztery kolumny: do zrobienia, w trakcie, zablokowane i zrobione. Upuść kartę w innej kolumnie, a jej status zapisze się od razu."
+
+msgid "Priorities and deadlines"
+msgstr "Priorytety i terminy"
+
+msgid "Mark each task as low, medium or high priority. Overdue tasks are highlighted, so nothing slips through."
+msgstr "Nadaj zadaniu niski, średni lub wysoki priorytet. Zaległe zadania są wyróżnione, więc nic Ci nie umknie."
+
+msgid "Progress at a glance"
+msgstr "Postęp w jednym miejscu"
+
+msgid "Your profile counts open and finished tasks and shows how much of the work is already done."
+msgstr "Profil zlicza otwarte i ukończone zadania oraz pokazuje, jaka część pracy jest już za Tobą."
+
+msgid "Your account, your data"
+msgstr "Twoje konto, Twoje dane"
+
+msgid "Pick an avatar, change your password or delete the account together with all its tasks at any time."
+msgstr "Wybierz awatar, zmień hasło albo w każdej chwili usuń konto razem ze wszystkimi zadaniami."
+
+msgid "Under the hood"
+msgstr "Pod maską"
+
+msgid "Small app, solid foundations"
+msgstr "Mała aplikacja, solidne fundamenty"
+
+msgid "TaskHub is a portfolio project, but it is built the way a production service should be: secure by default and easy to maintain."
+msgstr "TaskHub to projekt do portfolio, ale zbudowany tak, jak powinna być zbudowana usługa produkcyjna: domyślnie bezpieczny i łatwy w utrzymaniu."
+
+msgid "View the source code"
+msgstr "Zobacz kod źródłowy"
+
+msgid "Passwords stored only as secure hashes"
+msgstr "Hasła przechowywane wyłącznie jako skróty kryptograficzne"
+
+msgid "Email confirmation before the first login"
+msgstr "Potwierdzenie adresu e-mail przed pierwszym logowaniem"
+
+msgid "Single-use password reset links valid for one hour"
+msgstr "Jednorazowe linki do resetu hasła ważne przez godzinę"
+
+msgid "Rate limiting on login and password reset"
+msgstr "Limity prób logowania i resetu hasła"
+
+msgid "Every session signed out after a password change"
+msgstr "Wylogowanie wszystkich sesji po zmianie hasła"
+
+msgid "CSRF protection on every form"
+msgstr "Ochrona CSRF w każdym formularzu"
+
+msgid "Start with an empty board"
+msgstr "Zacznij od pustej tablicy"
+
+msgid "Create an account, confirm your email address and add your first task. It takes about a minute."
+msgstr "Załóż konto, potwierdź adres e-mail i dodaj pierwsze zadanie. Zajmie Ci to około minuty."
+
+msgid "Write the project README"
+msgstr "Napisz README projektu"
+
+msgid "Add demo screenshots"
+msgstr "Dodaj zrzuty ekranu"
+
+msgid "Design the landing page"
+msgstr "Zaprojektuj stronę startową"
+
+msgid "Header, feature list and sign-up section."
+msgstr "Nagłówek, lista funkcji i sekcja rejestracji."
+
+msgid "Polish the mobile layout"
+msgstr "Dopracuj widok mobilny"
+
+msgid "Set up SMTP on production"
+msgstr "Skonfiguruj SMTP na produkcji"
+
+msgid "Waiting for the DNS records."
+msgstr "Czekam na rekordy DNS."
+
+msgid "Add email confirmation"
+msgstr "Dodaj potwierdzanie e-maila"
+
+msgid "Limit login attempts"
+msgstr "Ogranicz próby logowania"
+
+msgid "Friday"
+msgstr "Piątek"
+
+msgid "Today"
+msgstr "Dziś"
+
+msgid "Yesterday"
+msgstr "Wczoraj"

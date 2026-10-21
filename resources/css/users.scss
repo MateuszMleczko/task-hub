@@ -1,15 +1,7 @@
-@use 'sass:color';
 @use 'sass:map';
 @use 'variables' as *;
 @use 'avatar-picker';
 @use 'auth';
-
-$status-accents: (
-    'todo': $color-teal-light,
-    'progress': $color-yellow,
-    'blocked': $color-coral,
-    'done': color.mix($color-teal-light, $color-teal, 35%),
-);
 
 .profile {
     --task-accent: #{$color-teal-light};
