@@ -30,6 +30,10 @@
                 <li class="home__fact"><i class="bi bi-translate" aria-hidden="true"></i><?= __('Polish and English') ?></li>
                 <li class="home__fact"><i class="bi bi-eye-slash" aria-hidden="true"></i><?= __('No ads or trackers') ?></li>
             </ul>
+            <div class="home__author">
+                <span class="home__author-name"><?= __('Built by Mateusz Mleczko') ?></span>
+                <?= $this->element('contact_buttons') ?>
+            </div>
         </div>
 
         <?= $this->element('board_preview', ['statuses' => $statuses, 'priorities' => $priorities]) ?>
@@ -80,7 +84,7 @@
                 <li class="home__stack-item">Vite</li>
             </ul>
             <a class="home__btn home__btn--ghost" href="https://github.com/MateuszMleczko/task-hub" target="_blank" rel="noopener">
-                <i class="bi bi-github" aria-hidden="true"></i><?= __('View the source code') ?>
+                <i class="bi bi-code-slash" aria-hidden="true"></i><?= __('View the source code') ?>
             </a>
         </div>
 
@@ -92,6 +96,20 @@
             <li class="home__check"><i class="bi bi-check2 home__check-icon" aria-hidden="true"></i><?= __('Every session signed out after a password change') ?></li>
             <li class="home__check"><i class="bi bi-check2 home__check-icon" aria-hidden="true"></i><?= __('CSRF protection on every form') ?></li>
         </ul>
+    </section>
+
+    <section class="home__section" aria-labelledby="home-author">
+        <div class="author-card">
+            <div class="author-card__intro">
+                <span class="home__eyebrow"><?= __('Author') ?></span>
+                <h2 class="home__heading" id="home-author">Mateusz Mleczko</h2>
+                <p class="home__text"><?= __('PHP and full-stack developer. I build web applications for businesses, from the database to the interface. Got a question about TaskHub or want to work together? Write to me or have a look at my profiles.') ?></p>
+            </div>
+            <div class="author-card__contact">
+                <?= $this->element('contact_buttons') ?>
+                <a class="home__link author-card__email" href="mailto:mateusz.mleczko@techtreesolutions.net">mateusz.mleczko@<wbr>techtreesolutions.net</a>
+            </div>
+        </div>
     </section>
 
     <section class="home__cta" aria-labelledby="home-cta">
@@ -109,8 +127,8 @@
             <i class="bi bi-info-circle home__notice-icon" aria-hidden="true"></i>
             <span>
                 <?= __('TaskHub is a portfolio demo project. Feel free to use it, but it is not a commercial service - please do not keep important data here.') ?>
-                <?= __('The source code is open source:') ?>
-                <a class="home__link" href="https://github.com/MateuszMleczko" target="_blank" rel="noopener">github.com/MateuszMleczko</a>
+                <?= __('The code is open source and the author is easy to reach:') ?>
+                <?= $this->element('contact_links') ?>
             </span>
         </p>
     </section>

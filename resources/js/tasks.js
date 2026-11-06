@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
         new Sortable(list, {
             group: 'tasks',
             animation: 150,
+            // On touch screens a swipe scrolls the board, only a long press picks a card up.
+            delay: 200,
+            delayOnTouchOnly: true,
+            touchStartThreshold: 5,
             ghostClass: 'task-card--ghost',
             chosenClass: 'task-card--chosen',
             dragClass: 'task-card--drag',
