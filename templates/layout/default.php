@@ -22,18 +22,18 @@
             <?= $this->Html->image('/favicon.svg', ['alt' => '', 'class' => 'navbar-brand__logo']) ?>TaskHub
         </a>
         <?php if ($this->request->getAttribute('identity')): ?>
-            <a class="nav-link nav-link-avatar ms-auto me-2 d-lg-none" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>">
+            <a class="nav-link nav-link-avatar ms-auto me-2 d-lg-none" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>" aria-label="<?= h(__('Profile')) ?>">
                 <?= $this->Profile->avatar($userAvatar, 'small') ?>
             </a>
         <?php endif; ?>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="<?= h(__('Toggle navigation')) ?>">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav ms-auto align-items-lg-center">
                 <?php if ($this->request->getAttribute('identity')): ?>
                     <li class="nav-item d-none d-lg-block">
-                        <a class="nav-link nav-link-avatar" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>">
+                        <a class="nav-link nav-link-avatar" href="<?= $this->Url->build(['controller' => 'Users', 'action' => 'profile']) ?>" aria-label="<?= h(__('Profile')) ?>">
                             <?= $this->Profile->avatar($userAvatar, 'small') ?>
                         </a>
                     </li>
@@ -68,20 +68,7 @@
     </div>
 </main>
 
-<footer class="site-footer">
-    <div class="container">
-        <p class="site-footer__text">
-            TaskHub &copy; <?= date('Y') ?> &middot;
-            <?= __('Portfolio demo project') ?> &middot;
-            <a class="site-footer__link" href="https://github.com/MateuszMleczko" target="_blank" rel="noopener">
-                <i class="bi bi-github me-1" aria-hidden="true"></i><?= __('Open source on GitHub') ?>
-            </a> &middot;
-            <?= $this->Html->link(__('Privacy policy'), ['controller' => 'Legal', 'action' => 'privacy'], [
-                'class' => 'site-footer__link',
-            ]) ?>
-        </p>
-    </div>
-</footer>
+<?= $this->element('site_footer') ?>
 
 <?= $this->Html->script(['bootstrap'], ['block' => false, 'type' => 'module']) ?>
 <?= $this->fetch('script') ?>

@@ -4,7 +4,7 @@
  * @var array $params
  * @var string $message
  */
-$class = 'message';
+$class = 'flash';
 if (!empty($params['class'])) {
     $class .= ' ' . $params['class'];
 }
@@ -12,4 +12,4 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
 }
 ?>
-<div class="<?= h($class) ?>" onclick="this.classList.add('hidden');"><?= $message ?></div>
+<div class="<?= h($class) ?>" onclick="this.classList.add('flash--hidden');"><?= $message ?></div>

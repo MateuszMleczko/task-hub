@@ -2,7 +2,6 @@
 /**
  * @var \App\View\AppView $this
  * @var string $message
- * @var string $url
  */
 use Cake\Core\Configure;
 
@@ -19,8 +18,5 @@ if (Configure::read('debug')) :
     $this->end();
 endif;
 ?>
-<h2><?= h($message) ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= __d('cake', 'The requested address {0} was not found on this server.', "<strong>'{$url}'</strong>") ?>
-</p>
+<h1 class="error-page__title"><?= h(__($message)) ?></h1>
+<p class="error-page__text"><?= __('We could not open this page. Check the address or go back to the home page.') ?></p>

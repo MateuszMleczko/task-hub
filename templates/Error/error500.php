@@ -29,8 +29,5 @@ if (Configure::read('debug')) :
     $this->end();
 endif;
 ?>
-<h2><?= __d('cake', 'An Internal Error Has Occurred.') ?></h2>
-<p class="error">
-    <strong><?= __d('cake', 'Error') ?>: </strong>
-    <?= h($message) ?>
-</p>
+<h1 class="error-page__title"><?= __d('cake', 'An Internal Error Has Occurred.') ?></h1>
+<p class="error-page__text"><?= __('Something went wrong on our side. Please try again in a moment.') ?></p>

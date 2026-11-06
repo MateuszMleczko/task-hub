@@ -49,14 +49,8 @@ msgstr "Potwierdź hasło"
 msgid "Logout"
 msgstr "Wyloguj"
 
-msgid "Back"
-msgstr "Wróć"
-
 msgid "Error"
 msgstr "Błąd"
-
-msgid "The requested address {0} was not found on this server."
-msgstr "Żądany adres {0} nie został znaleziony na tym serwerze."
 
 msgid "An Internal Error Has Occurred."
 msgstr "Wystąpił błąd wewnętrzny."
@@ -445,8 +439,8 @@ msgstr "Kod open source na GitHubie"
 msgid "TaskHub is a portfolio demo project. Feel free to use it, but it is not a commercial service - please do not keep important data here."
 msgstr "TaskHub to demonstracyjny projekt do portfolio. Możesz z niego normalnie korzystać, ale nie jest to usługa komercyjna — nie przechowuj tu ważnych danych."
 
-msgid "The source code is open source:"
-msgstr "Kod źródłowy jest otwarty (open source):"
+msgid "The code is open source and the author is easy to reach:"
+msgstr "Kod jest otwarty (open source), a z autorem łatwo się skontaktować:"
 
 msgid "Your tasks on one clear board"
 msgstr "Twoje zadania na jednej przejrzystej tablicy"
@@ -582,3 +576,54 @@ msgstr "Dziś"
 
 msgid "Yesterday"
 msgstr "Wczoraj"
+
+msgid "LinkedIn: profile of Mateusz Mleczko (opens in a new tab)"
+msgstr "LinkedIn: profil Mateusza Mleczki (otwiera się w nowej karcie)"
+
+msgid "GitHub: profile of Mateusz Mleczko (opens in a new tab)"
+msgstr "GitHub: profil Mateusza Mleczki (otwiera się w nowej karcie)"
+
+msgid "Send an email to Mateusz Mleczko"
+msgstr "Napisz e-mail do Mateusza Mleczki"
+
+msgid "Built by Mateusz Mleczko"
+msgstr "Autor: Mateusz Mleczko"
+
+msgid "Author"
+msgstr "Autor"
+
+msgid "PHP and full-stack developer. I build web applications for businesses, from the database to the interface. Got a question about TaskHub or want to work together? Write to me or have a look at my profiles."
+msgstr "Programista PHP i full-stack. Buduję aplikacje webowe dla firm, od bazy danych po interfejs. Masz pytanie o TaskHuba albo chcesz porozmawiać o współpracy? Napisz do mnie lub zajrzyj na moje profile."
+
+msgid "Toggle navigation"
+msgstr "Pokaż lub ukryj menu"
+
+msgid "Back to the home page"
+msgstr "Wróć na stronę główną"
+
+msgid "Not Found"
+msgstr "Nie znaleziono strony"
+
+msgid "Forbidden"
+msgstr "Brak dostępu"
+
+msgid "Bad Request"
+msgstr "Nieprawidłowe żądanie"
+
+msgid "Method Not Allowed"
+msgstr "Niedozwolona operacja"
+
+msgid "Missing or incorrect CSRF cookie type."
+msgstr "Formularz wygasł. Odśwież stronę i spróbuj ponownie."
+
+msgid "Missing or invalid CSRF cookie."
+msgstr "Formularz wygasł. Odśwież stronę i spróbuj ponownie."
+
+msgid "CSRF token from either the request body or request headers did not match or is missing."
+msgstr "Formularz wygasł. Odśwież stronę i spróbuj ponownie."
+
+msgid "We could not open this page. Check the address or go back to the home page."
+msgstr "Nie udało się otworzyć tej strony. Sprawdź adres albo wróć na stronę główną."
+
+msgid "Something went wrong on our side. Please try again in a moment."
+msgstr "Coś poszło nie tak po naszej stronie. Spróbuj ponownie za chwilę."

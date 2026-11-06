@@ -99,3 +99,6 @@ TaskHub is released under the [MIT License](LICENSE), © 2026 Mateusz Mleczko
 Third-party front-end packages keep their own licenses. `npm run build` writes their notices to
 `webroot/THIRD_PARTY_LICENSES.md` (Bootstrap, Popper, SortableJS) and `webroot/css/fonts/`
 (Bootstrap Icons, Inter - SIL Open Font License 1.1).
+
+The MIT License does not cover the logos in `webroot/img/brands/`. They are trademarks of GitHub, Inc. and
+LinkedIn Corporation, used only as links to the author's profiles under their brand guidelines.
